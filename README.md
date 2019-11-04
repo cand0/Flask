@@ -1,5 +1,7 @@
-OS : Ubuntu 16.04.6 LTS
-Apache/2.4.18
-python 3.5.2
-pip 8.1.1
-git version 2.7.4
+Ubuntu 18.04 LTS Minimal
+git 2.17.1
+Apache 2.4.29
+Python 3.6.8
+Flask 1.1.1
+Werkzeug 0.16.0
+pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)
