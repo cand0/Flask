@@ -233,7 +233,23 @@ input, select, textarea {
 		max-width: 100%;
 		width: 1400px;
 	}
-
+		details{
+			width: 100%;
+			padding:5px;
+		}
+			details > summary{
+				background-color: #98AFC7;
+				color :#FFF;
+				border-radius:20px 20px 0px 0px;
+				text-align : center;
+			}
+			details > summary::-webkit-details-marker {display: none}
+		strong{
+			color : #FFF;
+		}
+		p {
+			color : #000;
+		}
 		@media screen and (max-width: 1680px) {
 
 			.container {
@@ -275,14 +291,13 @@ input, select, textarea {
 		}
 
 /* Row */
-
 	.row {
 		display: flex;
 		flex-wrap: wrap;
 		box-sizing: border-box;
 		align-items: stretch;
-	}
-
+		padding-top:3%;
+	} 
 		.row > * {
 			box-sizing: border-box;
 		}
@@ -344,7 +359,11 @@ input, select, textarea {
 		}
 
 		.row > .col-4 {
-			width: 33.33333%;
+			width: 25%;
+			margin-top: 1%;
+			margin-left: 7%;
+/*			width: 33.33333%;*/
+			background-color : #DF7366;
 		}
 
 		.row > .off-4 {
@@ -409,6 +428,7 @@ input, select, textarea {
 
 		.row > .col-12 {
 			width: 100%;
+			background-color : #000;
 		}
 
 		.row > .off-12 {
@@ -482,6 +502,7 @@ input, select, textarea {
 				.row.gtr-uniform > * {
 					padding-top: 40px;
 				}
+
 
 		.row.gtr-150 {
 			margin-top: -60px;
@@ -1631,7 +1652,8 @@ input, select, textarea {
 				}
 
 				.row > .col-12-mobile {
-					width: 100%;
+					width: 10%;
+					color : #ff0000;
 				}
 
 				.row > .off-12-mobile {
@@ -1741,6 +1763,7 @@ input, select, textarea {
 						}
 
 		}
+
 
 /* Sections/Article */
 

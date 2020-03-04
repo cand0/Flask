@@ -1,0 +1,66 @@
+<details>
+<summary><strong>WEB<strong></summary>
+<div class="row">
+        {% for P_WEB in WEB %}
+                <article class="col-4 col-12-mobile special">
+                        <header>
+                                <h3><a href="#">{{P_WEB[0]}}</a></h3>
+                                <h4>VALUE : {{P_WEB[2]}}</h4>
+                                <p>
+                                        {{P_WEB[1]}}
+                                </p>
+                        </header>
+                </article>
+        {% endfor %}
+</div>
+</details>
+<!--
+<details>
+<summary><strong>WEB<strong></summary>
+<div class="row">
+	{% for P_WEB in WEB %}
+		<article class="col-4 col-12-mobile special">
+			<header>
+				<h3><a href="#">{{P_WEB[0]}}</a></h3>
+				<h4>VALUE : {{P_WEB[2]}}</h4>
+				<p>
+					{{P_WEB[1]}}
+				</p>
+			</header>
+		</article>
+	{% endfor %}
+</div>
+</details>
+<details>
+<summary><strong>PWNABLE<strong></summary>
+<div class="row">
+	{% for P_PWNABLE in PWNABLE %}
+		<article class="col-4 col-12-mobile special">
+			<header>
+				<h2><a href="#">{{P_PWNABLE[0]}}</a></h2>
+				<h5>VALUE : {{P_PWNABLE[2]}}</h5>
+			</header>
+			<p>
+				{{P_PWNABLE[1]}}
+			</p>
+		</article>
+	{% endfor %}
+</div>
+</details>
+<details>
+<summary><strong>REVERSING<strong></summary>
+<div class="row">
+	{% for P_REVERSING in REVERSING %}
+		<article class="col-4 col-12-mobile special">
+			<header>
+				<h2><a href="#">{{P_REVERSING[0]}}</a></h2>
+				<h5>VALUE : {{P_REVERSING[2]}}</h5>
+			</header>
+			<p>	
+				{{P_REVERSING[1]}}
+			</p>
+		</article>
+	{% endfor %}
+</div>
+</details>
+-->
