@@ -237,12 +237,14 @@ input, select, textarea {
 			width: 100%;
 			padding:5px;
 		}
-			.container details > summary{
-				background-color: #98AFC7;
+			.container details > summary {
+				background-color:#98AFC7;
 				border-radius:20px 20px 0px 0px;
 				text-align : center;
 			}
 			.container details summary strong{
+				font-size : 1.5em;
+				font-weight: 900;
 				color : #DAD9FF;
 			}
 			.container details > summary::-webkit-details-marker {display: none}
@@ -287,13 +289,28 @@ input, select, textarea {
 		}
 
 /* Row */
+	.challenge-problem > header{
+		background-color : #DF7366;
+		border-radius:30px 30px 30px 30px;
+	}
+	.challenge-problem > header h3{
+		font-weight: 600;
+		font-size : 2em;
+	}
+	.challenge-problem > header h4{
+		font-size : 1em;
+	}
+	.challenge-problem > header p {
+		font-size : 1.2em;
+	}
+
 	.row {
 		display: flex;
 		flex-wrap: wrap;
 		box-sizing: border-box;
 		align-items: stretch;
-		padding-top : 3%;
 	}
+
 		.row > * {
 			box-sizing: border-box;
 		}
@@ -420,7 +437,6 @@ input, select, textarea {
 
 		.row > .col-12 {
 			width: 100%;
-			background-color : #000;
 		}
 
 		.row > .off-12 {
@@ -494,7 +510,6 @@ input, select, textarea {
 				.row.gtr-uniform > * {
 					padding-top: 40px;
 				}
-
 
 		.row.gtr-150 {
 			margin-top: -60px;
@@ -1644,7 +1659,7 @@ input, select, textarea {
 				}
 
 				.row > .col-12-mobile {
-					width: 10%;
+					width: 100%;
 				}
 
 				.row > .off-12-mobile {
@@ -1755,7 +1770,6 @@ input, select, textarea {
 
 		}
 
-
 /* Sections/Article */
 
 	section, article {
@@ -1766,10 +1780,8 @@ input, select, textarea {
 			margin-bottom: 0;
 		}
 
-		section.special > header, section.special > footer, article.special > header, article.special > footer{
+		section.special > header, section.special > footer, article.special > header, article.special > footer {
 			text-align: center;
-			background-color : #DF7366;
-			border-radius:30px 30px 30px 30px;
 		}
 
 	.row > section, .row > article {
@@ -1781,26 +1793,15 @@ input, select, textarea {
 	}
 
 		header > p {
-			display: balck;
-			font-size: 1em;
-			margin: 1em 0 0em 0;
-			line-height: 2.5em;
+			display: block;
+			font-size: 1.5em;
+			margin: 0em 0 0em 0;
+			line-height: 1.5em;
 			text-align: inherit;
-			background-color : #DF7366;
 		}
 
 	footer {
 		margin: 0 0 0 0;
-	}
-	/*challenge and problem color differ*/
-	article h2 {
-		background-color : #fff;
-	}
-	article h3 {
-		font-size:2.5em;
-	}
-	article h4 {
-		font-size:1em;
 	}
 
 /* Image */
