@@ -1,75 +1,43 @@
-<!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-                <title>Hello Cand0</title>
-                <meta charset="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-                <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-                <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
-	</head>
-	<body class="no-sidebar is-preload">
-		<div id="page-wrapper">
-
-			<!-- Header -->
-				<div id="header">
-
-					<!-- Inner -->
-						<div class="inner">
-							<header>
-								<h1><a href="index" id="logo">Cnad0</a></h1>
-							</header>
-						</div>
-
-					<!-- Nav -->
 					{% include "/base/top.html" %}
+					{% include "/base/sub_top.html" %}
 				</div>
-
 			<!-- Main -->
 				<div class="wrapper style1">
+
 					<div class="container">
-						<article id="main" class="special">
-							<header>
-								<h2><a href="#">Challenge</a></h2>
-							</header>
-						</article>
-						<hr />
-						<div class="row">
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
-								<header>
-									<h2><a href="#">Name</a></h2>
-									<h5>Score</h5>
-								</header>
-								<p>
-									Message
-								</p>
-							</article>
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Sed quis rhoncus placerat</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">Magna laoreet et aliquam</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
+						<div class="row gtr-200">
+							<div class="col-4 col-12-mobile" id="sidebar">
+								<hr class="first" />
+								<section>
+									<header>
+										<h3><a href="#">Team Name</a></h3>
+									</header>
+								</section>
+								<hr />
+								{% for team in teams %}
+									<a href = "{{team[0]}}" target-"_self"><p>{{team[0]}}<p></a>
+									<hr />
+								{% endfor %}
+							</div>
+							<div class="col-8 col-12-mobile imp-mobile" id="content">
+								<article id="main">
+									<header>
+										<h2><a href="#">Team Information</a></h2>
+										{% if users %}
+											<h3>Leader : {{my_team[1]}}</h3>
+											<h4>Score : {{my_team[2]}}</h4>
+											{% for user in users %}
+											<p>
+												Member : {{user[0]}}
+											</p>
+											<hr />
+											{% endfor %}
+										{% endif %}
+									</header>
+								</article>
+							</div>
 						</div>
+						<hr />
 					</div>
 
 				</div>

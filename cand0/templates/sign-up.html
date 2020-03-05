@@ -1,36 +1,5 @@
-<!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-                <title>sign-up</title>
-                <meta charset="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-                <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-                <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
-	</head>
-	<body class="no-sidebar is-preload">
-		<div id="page-wrapper">
-
-			<!-- Header -->
-				<div id="header">
-
-					<!-- Inner -->
-						<div class="inner">
-							<header>
-<!--                                                        <footer>
-                                                                <a href="#banner" class="button circled scrolly">Start</a>
-                                                        </footer>
--->
-								<h1><a href="index.html" id="logo">Sign-up</a></h1>
-							</header>
-						</div>
-
-					<!-- Nav -->
 					{% include "/base/top.html" %}
+					{% include "/base/sub_top.html" %}
 				</div>
 
 			<!-- Main -->
@@ -49,16 +18,15 @@
 							<section>
 								<form action="/sign-up-proc" method="post">
 									<div class="container">
-										<label for="ID"><b>Team Name</b></label>
-										<input type="text" placeholder="Enter Team Name" name="ID" required>
+										<label for="TEAM_NAME"><b>Team Name</b></label>
+										<input type="text" placeholder="Enter Team Name" name="TEAM_NAME" required>
+										<hr />
+										<label for="ID"><b>ID</b></label>
+										<input type="text" placeholder="Enter ID" name="ID" required>
 										<label for="psw"><b>Password</b></label>
 										<input type="password" placeholder="Enter Password" name="PSW" required>
 										<label for="psw-repeat"><b>Repeat Password</b></label>
 										<input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-										<label for="Member"><b><br>Member Name</b></label>
-										<input type="text" placeholder="Member1" name="member1" required>
-										<input type="text" placeholder="Member2" name="member2" required>
-										<input type="text" placeholder="Member3" name="member3" required>
 											<div class="clearfix">
 											<br>
 											<button type="submit" class="signup">Sign Up</button>
