@@ -9,7 +9,10 @@
 								<hr class="first" />
 								<section>
 									<header>
-										<h3><a href="#">Team Name</a></h3>
+                                                                                {% if session['ID'] %}
+                                                                                	<p><a href = {{my_team}}> Go to our team!</a></p><br>
+                                                                                {% endif %}
+										<h3>Team Name</h3>
 									</header>
 								</section>
 								<hr />
@@ -23,17 +26,28 @@
 									<header>
 										<h2><a href="#">Team Information</a></h2>
 										{% if users %}
-											<h3>Leader : {{my_team[1]}}</h3>
-											<h5>Score : {{my_team[2]}}</h5>
+											<h3>Leader : {{sel_team[1]}} </h3>
+											<h5>Score : {{sel_team[2]}} </h5>
 											<hr />
 											{% for user in users %}
 											<h4>
-												Member : {{user[0]}}
+												Member : {{(user[0])}}
 											</h4>
-											<p>
-												information : {{user[1]}}
-											</p>
-											<hr />
+												<article id="sub">
+													<header>
+														Information
+													</header>
+													{% if user[0] == session['ID'] %}
+														<form action="/team-proc/" method="post">
+															<textarea type="text" name="MESSAGE">{{user[1]}}</textarea>
+															<button type="submit">Modify</button>
+														</form>
+													{% else %}
+														<pre>{{user[1]}}</pre>
+												</article>
+
+												<hr />
+											{% endif %}
 											{% endfor %}
 										{% endif %}
 									</header>

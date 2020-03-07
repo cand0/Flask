@@ -3151,17 +3151,8 @@ input, select, textarea {
 	}
 /* My Zone */
 .team hr {
-                position: relative;
-                display: block;
-                border: 0;
-                margin-bottom: 9em;
-                height: 6px;
-                border-top: solid 1px rgba(128, 128, 128, 0.2);
-                border-bottom: solid 1px rgba(128, 128, 128, 0.2);
-    -webkit-margin-before: 0.5em;
-    -webkit-margin-after: 0.5em;
-    -webkit-margin-start: auto;
-    -webkit-margin-end: auto;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
 	top: 0em;
 }
 .team h3{
@@ -3174,8 +3165,21 @@ input, select, textarea {
 .team h5{
 	font-size : 1.2em;
 }
-.team p{
+.team article #sub{
+        margin: 0em 0 0em 0;
+        height: auto;
+	background-color : #EAEAEA;
+}
+.team article #sub > header{
+	line-height: 1.5em;
+	text-align : center;
+	background-color : #D5D5D5;
+}
+.team pre{
 	font-size : 1em;
+	word-break: break-all;
+	line-height: 1em;
+	font-weight:500;
 }
 
 .challenge-problem > header{

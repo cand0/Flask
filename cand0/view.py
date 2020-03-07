@@ -19,7 +19,8 @@ def nosidebar():
 		#app.secret_key
 @app.route("/sign-up/")
 def signup():
-	return render_template('sign-up.html')
+	placeholder_signup = "이름 : \n이메일 : "
+	return render_template('sign-up.html', placeholder_signup = placeholder_signup)
 
 @app.route("/sign-up-proc/", methods=['POST'])
 def signupproc():
@@ -81,6 +82,8 @@ def logout():
 @app.route("/team/")
 @app.route("/team/<name>")
 def team(name = None):
+	option = 0;
+
 	conn = sqlite3.connect('/cand0/cand0/cand0.db')
 	cur = conn.cursor()
 
@@ -88,18 +91,49 @@ def team(name = None):
 	cur.execute("select NAME, LEADER, SCORE from TEAM")
 	teams = cur.fetchall()
 
+	#Go to our team
+	if 'ID' in session:
+		cur.execute("select TEAM_NAME from USER where ID='%s'"%session['ID'])
+		my_team = cur.fetchall()
+
 	if name != None:
-		cur.execute("select ID, MESSAGE from USER where TEAM_NAME='%s'"%name)
+		cur.execute("select ID ,MESSAGE from USER where TEAM_NAME='%s'"%name)
 		users = cur.fetchall()
 
 		#select team information
-		cur.execute("select TEAM_NAME from USER where ID='%s'"%name)
-		my_team = cur.fetchall()
-		cur.execute("select NAME, LEADER, SCORE from TEAM where NAME='%s'"%my_team[0][0])
-		my_team = cur.fetchall()
+		cur.execute("select NAME, LEADER, SCORE from TEAM where NAME='%s'"%name)
+		sel_team = cur.fetchall()
 
-		return render_template("team.html",teams=teams , name = name, users = users, my_team = my_team[0])
-	return render_template("team.html", teams=teams)
+		#Modify My Team
+		for chk_user in users:
+			if chk_user[0] == session['ID'] :
+				option = 1;
+				break;
+
+		return render_template("team.html",teams=teams , name = name, users = users, sel_team = sel_team[0], my_team = my_team[0][0], option = option)
+	elif 'ID' in session:
+		return redirect(url_for('team', name = session['ID']))
+	else :
+		return render_template("team.html", teams=teams, option = option)
+
+@app.route("/team-proc/", methods=['POST'])
+def teamproc():
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	#update user
+	MESSAGE = request.form['MESSAGE']
+
+	cur.execute("UPDATE USER SET MESSAGE = ? WHERE ID = ?", (MESSAGE, session['ID']))
+
+	#find my team
+	cur.execute("select TEAM_NAME from USER where ID = '%s'"%session['ID'])
+	my_team = cur.fetchall()
+
+	conn.commit()
+	conn.close()
+
+	return redirect(url_for('team', name = my_team[0][0]))
 
 		###challenge###
 @app.route("/challenge/")
