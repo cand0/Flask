@@ -29,11 +29,20 @@ def signupproc():
 	ID = request.form['ID']
 	PSW = request.form['PSW']
 	TEAM_NAME = request.form['TEAM_NAME']
+	MESSAGE = request.form['MESSAGE']
 
-	sql = "insert into USER values(?,?,?)"
-	cur.execute(sql, (ID, PSW, TEAM_NAME))
+	cur.execute("select NAME from TEAM where NAME = '%s'"%TEAM_NAME)
+	chk_team = cur.fetchall()
 
+		###user TEAM insert###
+	if chk_team == []:
+		sql = "insert into TEAM(NAME, LEADER) values(?,?)"
+		cur.execute(sql, (TEAM_NAME, ID))
+		conn.commit()
+	sql = "insert into USER values(?,?,?,?)"
+	cur.execute(sql, (ID, PSW, TEAM_NAME, MESSAGE))
 	conn.commit()
+
 	conn.close()
 	return redirect(url_for('index'))
 
@@ -80,15 +89,17 @@ def team(name = None):
 	teams = cur.fetchall()
 
 	if name != None:
-		cur.execute("select ID from USER where TEAM_NAME='%s'"%name)
+		cur.execute("select ID, MESSAGE from USER where TEAM_NAME='%s'"%name)
 		users = cur.fetchall()
 
+		#select team information
 		cur.execute("select TEAM_NAME from USER where ID='%s'"%name)
 		my_team = cur.fetchall()
 		cur.execute("select NAME, LEADER, SCORE from TEAM where NAME='%s'"%my_team[0][0])
 		my_team = cur.fetchall()
+
 		return render_template("team.html",teams=teams , name = name, users = users, my_team = my_team[0])
-	return render_template("team.html", teams=teams, users = None)
+	return render_template("team.html", teams=teams)
 
 		###challenge###
 @app.route("/challenge/")

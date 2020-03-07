@@ -3,7 +3,6 @@
 				</div>
 			<!-- Main -->
 				<div class="wrapper style1">
-
 					<div class="container">
 						<div class="row gtr-200">
 							<div class="col-4 col-12-mobile" id="sidebar">
@@ -15,20 +14,24 @@
 								</section>
 								<hr />
 								{% for team in teams %}
-									<a href = "{{team[0]}}" target-"_self"><p>{{team[0]}}<p></a>
+									<a href = "{{team[0]}}"><p>{{team[0]}}<p></a>
 									<hr />
 								{% endfor %}
 							</div>
-							<div class="col-8 col-12-mobile imp-mobile" id="content">
+							<div class="col-8 col-12-mobile imp-mobile team" id="content">
 								<article id="main">
 									<header>
 										<h2><a href="#">Team Information</a></h2>
 										{% if users %}
 											<h3>Leader : {{my_team[1]}}</h3>
-											<h4>Score : {{my_team[2]}}</h4>
+											<h5>Score : {{my_team[2]}}</h5>
+											<hr />
 											{% for user in users %}
-											<p>
+											<h4>
 												Member : {{user[0]}}
+											</h4>
+											<p>
+												information : {{user[1]}}
 											</p>
 											<hr />
 											{% endfor %}

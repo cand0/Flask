@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
+]@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
 @import url("fontawesome-all.min.css");
 
 /*
@@ -289,21 +289,6 @@ input, select, textarea {
 		}
 
 /* Row */
-	.challenge-problem > header{
-		background-color : #DF7366;
-		border-radius:30px 30px 30px 30px;
-	}
-	.challenge-problem > header h3{
-		font-weight: 600;
-		font-size : 2em;
-	}
-	.challenge-problem > header h4{
-		font-size : 1em;
-	}
-	.challenge-problem > header p {
-		font-size : 1.2em;
-	}
-
 	.row {
 		display: flex;
 		flex-wrap: wrap;
@@ -3164,3 +3149,46 @@ input, select, textarea {
 					}
 
 	}
+/* My Zone */
+.team hr {
+                position: relative;
+                display: block;
+                border: 0;
+                margin-bottom: 9em;
+                height: 6px;
+                border-top: solid 1px rgba(128, 128, 128, 0.2);
+                border-bottom: solid 1px rgba(128, 128, 128, 0.2);
+    -webkit-margin-before: 0.5em;
+    -webkit-margin-after: 0.5em;
+    -webkit-margin-start: auto;
+    -webkit-margin-end: auto;
+	top: 0em;
+}
+.team h3{
+	font-wegiht:600;
+	font-size : 2em;
+}
+.team h4{
+	font-size : 1.5em;
+}
+.team h5{
+	font-size : 1.2em;
+}
+.team p{
+	font-size : 1em;
+}
+
+.challenge-problem > header{
+        background-color : #DF7366;
+        border-radius:30px 30px 30px 30px;
+}
+.challenge-problem > header h3{
+        font-weight: 600;
+        font-size : 2em;
+}
+.challenge-problem > header h4{
+        font-size : 1em;
+}
+.challenge-problem > header p {
+        font-size : 1.2em;
+}
