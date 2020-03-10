@@ -12,14 +12,16 @@ def team(name = None):
 	cur = conn.cursor()
 
 	#find team list
-	cur.execute("select NAME, LEADER, SCORE from TEAM")
+	cur.execute("select NAME from TEAM")
 	teams = cur.fetchall()
 
-	#Go to our team
+	#Go to my team
+	my_team = []
 	if 'ID' in session:
 		cur.execute("select TEAM_NAME from USER where ID='%s'"%session['ID'])
 		my_team = cur.fetchall()
 
+	#parameter check
 	if name != None:
 		cur.execute("select ID ,MESSAGE from USER where TEAM_NAME='%s'"%name)
 		users = cur.fetchall()
@@ -29,12 +31,14 @@ def team(name = None):
 		sel_team = cur.fetchall()
 
 		#Modify My Team
+		option = 0
 		for chk_user in users:
-			if chk_user[0] == session['ID'] :
-				option = 1;
-				break;
+			if 'ID' in session:
+				if chk_user[0] == session['ID'] :
+					option = 1;
+					break;
 
-		return render_template("team.html",teams=teams , name = name, users = users, sel_team = sel_team[0], my_team = my_team[0][0], option = option)
+		return render_template("team.html",teams=teams, name = name, users = users, sel_team = sel_team[0], my_team = my_team, option = option)
 	elif 'ID' in session:
 		return redirect(url_for('teams.team', name = session['ID']))
 	else :

@@ -10,7 +10,7 @@
 								<section>
 									<header>
                                                                                 {% if session['ID'] %}
-                                                                                	<p><a href = {{my_team}}> Go to our team!{{my_team}}</a></p><br>
+                                                                                	<p><a href = {{my_team}}> Go to my team!</a></p><br>
                                                                                 {% endif %}
 										<h3>Team Name</h3>
 									</header>
@@ -37,7 +37,7 @@
 													<header>
 														Information
 													</header>
-													{% if user[0] == session['ID'] %}
+													{% if option == 1 %}
 														<form action="/team-proc/" method="post">
 															<textarea type="text" name="MESSAGE">{{user[1]}}</textarea>
 															<button type="submit">Modify</button>
@@ -45,9 +45,8 @@
 													{% else %}
 														<pre>{{user[1]}}</pre>
 												</article>
-
 												<hr />
-											{% endif %}
+													{% endif %}
 											{% endfor %}
 										{% endif %}
 									</header>
