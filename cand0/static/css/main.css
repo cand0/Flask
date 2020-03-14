@@ -3239,10 +3239,8 @@ input, select, textarea {
         overflow-y:auto;
 	display:inline-block;
 }
-.challenge-choice-auth {
-	top:10px;
-        width:inherit;
-        height:30px;
-	display:inline-block;
-	background:rgba(152,175,199);
+.challenge-auth {
+	background:rgba(189,189,189,0.5);
+	border-radius:30px 30px 30px 30px;
+	left : 10px;
 }
