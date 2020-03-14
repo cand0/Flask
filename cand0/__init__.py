@@ -17,10 +17,6 @@ def index():
 def test():
 	return render_template('test.html')
 
-@app.route("/challenges/test.js")
-def testjs():
-	return render_template('test.js')
-
 app.register_blueprint(challenges)
 app.register_blueprint(auth)
 app.register_blueprint(teams)

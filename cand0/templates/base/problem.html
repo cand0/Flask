@@ -2,14 +2,14 @@
 	<details>
 	<summary><strong>{{ cate[0] }}<strong></summary>
 	<div class="row">
-		{% for problem in prob %}
-			{% if problem[1] == cate[0] %}
+		{% for i in range(0, prob_len) %}
+			{% if prob[i][1] == cate[0] %}
 		                <article class="col-4 col-12-mobile special challenge-problem">
 		                        <header>
-		                                <h3 onclick = "challenge_choice_on()">{{problem[0]}}</h3>
-		                                <h4>VALUE : {{problem[3]}}</h4>
+		                                <h3 onclick = "challenge_choice_on('{{prob[i][0]}}', '{{prob[i][2]}}')">{{prob[i][0]}}</h3>
+		                                <h4>VALUE : {{prob[i][3]}}</h4>
 		                                <p>
-		                                        {{problem[2]}}
+		                                        {{prob[i][2]}}
 		                                </p>
 		                        </header>
 		                </article>
