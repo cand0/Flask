@@ -37,10 +37,10 @@ def team(name = None):
 				if chk_user[0] == session['ID'] :
 					option = 1;
 					break;
-
 		return render_template("team.html",teams=teams, name = name, users = users, sel_team = sel_team[0], my_team = my_team, option = option)
-	elif 'ID' in session:
-		return redirect(url_for('teams.team', name = session['ID']))
+
+	if 'ID' in session:
+		return redirect(url_for('teams.team', name = my_team[0][0]))
 	else :
 		return render_template("team.html", teams=teams, option = option)
 

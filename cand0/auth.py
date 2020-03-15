@@ -52,7 +52,7 @@ def signinproc():
         conn.close()
 
         if rows:
-                if PW == rows[0][0]:
+                if str(PW) == str(rows[0][0]):
                         session['ID'] = request.form['ID']
                         return redirect(url_for('index'))
                 else :

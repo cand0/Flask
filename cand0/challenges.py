@@ -36,9 +36,8 @@ def challengesauth():
 		return "No Flag"
 	else:
 		#Get User Team Name
-		cur.execute("select TEAM_NAME from USER where TEAM_NAME = '%s'"%session['ID'])
+		cur.execute("select TEAM_NAME from USER where ID = '%s'"%session['ID'])
 		USER_TEAM_NAME = cur.fetchall()
-
 		#duplicate Flag authentication
 		cur.execute("select USER_TEAM_NAME, CHALLENGE_NAME from SOLVES where CHALLENGE_NAME = '" + str(chk_flag[0][0]) + "' and USER_TEAM_NAME = '%s'"%USER_TEAM_NAME[0][0])
 		dup_auth = cur.fetchall()
