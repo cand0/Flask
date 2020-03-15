@@ -3,6 +3,7 @@ from flask import Flask, render_template
 from cand0.challenges import challenges
 from cand0.auth import auth
 from cand0.teams import teams
+from cand0.scoreboard import scoreboard
 
 app = Flask(__name__)
 
@@ -20,3 +21,4 @@ def test():
 app.register_blueprint(challenges)
 app.register_blueprint(auth)
 app.register_blueprint(teams)
+app.register_blueprint(scoreboard)

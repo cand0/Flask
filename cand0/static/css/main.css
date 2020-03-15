@@ -3244,3 +3244,36 @@ input, select, textarea {
 	border-radius:30px 30px 30px 30px;
 	left : 10px;
 }
+/*scoreboard*/
+.scoreboard {
+}
+.scoreboard > table{
+	font-weight:800;
+}
+.td-first{
+	background-color:#FAE0D4;
+	height:30px;
+}
+.td-second{
+	background-color:#fff0d4;
+	height:30px;
+}
+.td-top{
+	height:45px;
+	text-align: center;
+	font-size:30px;
+}
+.td-place{
+	width:10%;
+	font-weight:900;
+	font-size:20px;
+	text-align:center;
+}
+.td-name{
+	width:80%;
+}
+.td-score{
+	width:10%;
+	font-weight:5;
+	text-align:center;
+}
