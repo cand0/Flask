@@ -1,21 +1,22 @@
 		{% include "/base/top.html" %}
+                                        <!-- Inner -->
+                                                <div class="inner">
+                                                        <header>
+                                                                <h1><a href="#challenges" id="logo" class="circled scrolly">Challenges</h1>
+                                                        </header>
+                                                </div>
 		{% include "/base/sub_top.html" %}
 		</div>
 			<!-- main -->
 				<div class="wrapper style1">
 					<div class="container">
-						<div class="challenge-auth team">
+						<div id="challenges"class="challenge-auth team">
 							<h3>Auth</h3>
 							<form action="/challenges-auth" method="post">
 								<input type="text" placeholder='cand0{"FLAG"}' name="test" required>
 								<button type="submit" class="challenge-auth">submit</button>
 							</form>
 						</div>
-						<article id="main" class="special">
-							<header>
-								<h2><a href="#main">Challenge</a></h2>
-							</header>
-						</article>
 						<hr />
 							{% include "/base/problem.html" %}
 					</div>
@@ -163,6 +164,14 @@
 				</div>
 		</div>
 		<!-- Scripts -->
+                        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.dropotron.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrolly.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/util.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/main.js')}}"></script>
 			<script src="{{ url_for('static', filename='js/myjs.js') }}"></script>
 	</body>
 </html>

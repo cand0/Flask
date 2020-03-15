@@ -1,4 +1,12 @@
 					{% include "/base/top.html" %}
+
+
+                                        <!-- Inner -->
+                                                <div class="inner">
+                                                        <header>
+                                                                <h1><a href="#content" id="logo" class="circled scrolly">Team</h1>
+                                                        </header>
+                                                </div>
 					{% include "/base/sub_top.html" %}
 				</div>
 			<!-- Main -->
@@ -24,7 +32,7 @@
 							<div class="col-8 col-12-mobile imp-mobile team" id="content">
 								<article id="main">
 									<header>
-										<h2><a href="#">Team Information</a></h2>
+										<h2>Team Information</a></h2>
 										{% if users %}
 											<h3>Leader : {{sel_team[1]}} </h3>
 											<h5>Score : {{sel_team[2]}} </h5>
@@ -201,14 +209,13 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+                        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.dropotron.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrolly.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/util.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/main.js')}}"></script>
 	</body>
 </html>

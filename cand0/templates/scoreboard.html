@@ -1,11 +1,17 @@
                 {% include "/base/top.html" %}
+                                        <!-- Inner -->
+                                                <div class="inner">
+                                                        <header>
+                                                                <h1><a href="#scoreboard" id="logo" class="circled scrolly">Scoreboard</a></h1>
+                                                        </header>
+                                                </div>
                 {% include "/base/sub_top.html" %}
 		</div>
 			<!-- Main -->
 				<div class="wrapper style1">
 
 					<div class="container">
-						<div class="scoreboard">
+						<div id="scoreboard" class="scoreboard">
 							<table>
 								<td class = "td-top">Place</td><td class = "td-top">Team_Name</td><td class = "td-top">Score</td>
 									{% for i in range(len_score) %}
@@ -165,5 +171,13 @@
 		</div>
 
 		<!-- Scripts -->
+                        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.dropotron.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrolly.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/util.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/main.js')}}"></script>
 	</body>
 </html>
