@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import sqlite3
 
 from cand0.challenges import challenges
 from cand0.auth import auth
@@ -12,7 +13,13 @@ app.secret_key = 'session_secret_key'
 @app.route("/")
 @app.route("/index/")
 def index():
-        return render_template('index.html')
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	cur.execute("select DATE, MESSAGE from INDEX_HINT order by DATE")
+	hints = cur.fetchall()
+
+	return render_template('index.html', hints = hints)
 @app.route("/test/")
 @app.route("/test.html/")
 def test():
