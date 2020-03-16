@@ -20,7 +20,7 @@
 										{% else %}
 											<tr class = "td-second">
 										{% endif %}
-										<td class="td-place">{{i+1}}</td><td class="td-name">{{score[i][0]}}</td><td class="td-score">{{score[i][1]}}</h3>
+										<td class="td-place">{{i+1}}</td><td class="td-name"><a href = "/teams/{{score[i][0]}}">{{score[i][0]}}</a></td><td class="td-score">{{score[i][1]}}</h3>
 									{% endfor %}
 							</table>
 						</div>
