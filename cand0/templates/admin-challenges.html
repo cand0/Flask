@@ -1,0 +1,51 @@
+			{% include "/base/top.html" %}
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1><a href="#" id="logo">Challenge</a></h1>
+							</header>
+						</div>
+			{% include "/base/sub_admin_top.html" %}
+				</div>
+
+			<!-- Main -->
+				<div class="wrapper style1">
+					<div class="container">
+                                                <article id="main" class="special">
+                                                        <header>
+                                                                <h2><a href="#main" class="circled scrolly">Create Challenge</a></h2>
+                                                        </header>
+						<form action="/admin-challenges-auth/" method="post">
+							<input type="text" placeholder="Challenge Name" name="challenge_name" /required></input>
+							<input type="text" placeholder="Category" name="challenge_category" /required></input>
+							<input type="text" placeholder="Value" name="challenge_value" /required></input>
+							<input type="text" placeholder="flag" name="challenge_flag" /required></input>
+							<textarea type="text" placeholder="Message" name="challenge_message"></textarea>
+							<button type="submit"><h4>Create!</h4></button>
+						</form>
+						<hr />
+						<header id = "Manage_challenge"><h2><a href="#Manage_challenge" class="circled scrolly">Manage Challenge</a></h2></header>
+						{% include "/base/problem.html" %}
+						</article>
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+				{% include "/base/footer.html" %}
+
+		</div>
+
+		<!-- Scripts -->
+                        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.dropotron.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrolly.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/util.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+			<script src="{{url_for('static', filename='js/admin.js')}}"></script>
+	</body>
+</html>
+{% include "/base/admin-challenge-choice.html" %}

@@ -1,0 +1,42 @@
+			{% include "/base/top.html" %}
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1><a href="admin.html" id="logo">Admin</a></h1>
+							</header>
+						</div>
+			{% include "/base/sub_admin_top.html" %}
+				</div>
+
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#">Admin</a></h2>
+								<p>
+								</p>
+							</header>
+						</article>
+						<hr />
+						<div class="row">
+						</div>
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+				{% include "/base/footer.html" %}
+
+		</div>
+
+		<!-- Scripts -->
+                        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.dropotron.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrolly.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+	</body>
+</html>

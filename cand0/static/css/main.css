@@ -3151,10 +3151,6 @@ input, select, textarea {
 
 	}
 /* My Zone */
-/*index
-EAEAEA
-D5D5D5*/
-
 .hint{
 	border-radius:30px 30px 30px 30px;
         text-align : center;
@@ -3304,3 +3300,5 @@ D5D5D5*/
 	font-weight:5;
 	text-align:center;
 }
+
+/*admin*/
