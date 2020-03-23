@@ -1,4 +1,4 @@
-function challenge_choice_on(challenge_name, challenge_message){
+function challenge_choice_on(challenge_name, challenge_message, challenge_value){
 	document.getElementById("challenge_name").innerHTML = challenge_name;
 	document.getElementById("challenge_message").innerHTML = challenge_message;
 

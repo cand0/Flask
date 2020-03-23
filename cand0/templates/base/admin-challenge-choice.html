@@ -2,13 +2,19 @@
 <body>
 	<div id = "challenge-choice-wrapper" class = "challenge-choice-wrapper" onclick="challenge_choice_off()">
 	</div>
-	<div id = "challenge-choice-body" class="challenge-choice-body team">
-		<div class="challenge-choice-name">
-			<h2 id = "challenge_name"></h2>
+	<form action = "/admin-challenges-fix/" method = "post">
+	<div id = "challenge-choice-body" class="challenge-choice-body admin-challenge">
+		<div class="challenge-choice-name admin-challenge-choice-name">
+			<input type="text" id = "admin_challenge_name" name = "admin_challenge_name" readonly />
+			<input type="int" id = "admin_challenge_value" name = "admin_challenge_value"></input>
+			<input type="text" id = "admin_challenge_category" name = "admin_challenge_category"></input>
 		</div>
 		<div class="challenge-choice-message">
-			<h3 id = "challenge_message"></h3>
+			<textarea type="text" id = "admin_challenge_message" name = "admin_challenge_message"></textarea>
 		</div>
+		<input type="submit" value = "update" name = "submit"></input>
+		<input type="submit" value = "delete" name = "submit"></input>
+	</form>
 	</div>
 </body>
 </html>

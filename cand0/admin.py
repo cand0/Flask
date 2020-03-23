@@ -39,3 +39,23 @@ def adminchallengeauth():
 	conn.commit()
 	conn.close()
 	return redirect(url_for('admin.adminchallenge'))
+
+@admin.route('/admin-challenges-fix/', methods=['POST'])
+def adminchallengesfix():
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	name = request.form['admin_challenge_name']
+	value = request.form['admin_challenge_value']
+	message = request.form['admin_challenge_message']
+	category = request.form['admin_challenge_category']
+	submit = request.form['submit']
+
+	if submit == "update" :
+		sql = "update CHALLENGE set VALUE = '%s', MESSAGE = '%s', CATEGORY = '%s' where NAME = '%s'"%(value, message, category, name)
+	elif submit == "delete" :
+		sql = "delete from CHALLENGE where NAME = '%s'"%(name)
+	cur.execute(sql)
+	conn.commit()
+	conn.close()
+	return redirect(url_for('admin.adminchallenge'))
