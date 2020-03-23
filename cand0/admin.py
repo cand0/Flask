@@ -59,3 +59,44 @@ def adminchallengesfix():
 	conn.commit()
 	conn.close()
 	return redirect(url_for('admin.adminchallenge'))
+
+@admin.route('/admin-teams/')
+@admin.route("/admin-teams/<name>")
+def adminteam(name = None):
+        option = 0;
+
+        conn = sqlite3.connect('/cand0/cand0/cand0.db')
+        cur = conn.cursor()
+
+        #find team list
+        cur.execute("select NAME from TEAM")
+        teams = cur.fetchall()
+
+        #Go to my team
+        my_team = []
+        if 'ID' in session:
+                cur.execute("select TEAM_NAME from USER where ID='%s'"%session['ID'])
+                my_team = cur.fetchall()
+
+        #parameter check
+        if name != None:
+                cur.execute("select ID ,MESSAGE from USER where TEAM_NAME='%s'"%name)
+                users = cur.fetchall()
+
+                #select team information
+                cur.execute("select NAME, LEADER, SCORE from TEAM where NAME='%s'"%name)
+                sel_team = cur.fetchall()
+
+                #Modify My Team
+                option = 0
+                for chk_user in users:
+                        if 'ID' in session:
+                                if chk_user[0] == session['ID'] :
+                                        option = 1;
+                                        break;
+                return render_template("admin-team.html",teams=teams, name = name, users = users, sel_team = sel_team[0], my_team = my_team, option = option)
+
+        if 'ID' in session:
+                return redirect(url_for('teams.adminteam', name = my_team[0][0]))
+        else :
+                return render_template("admin-team.html", teams=teams, option = option)

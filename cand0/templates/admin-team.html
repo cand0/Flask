@@ -1,0 +1,80 @@
+					{% include "/base/top.html" %}
+
+
+                                        <!-- Inner -->
+                                                <div class="inner">
+                                                        <header>
+                                                                <h1><a href="#content" id="logo" class="circled scrolly">Team</h1>
+                                                        </header>
+                                                </div>
+					{% include "/base/sub_admin_top.html" %}
+				</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+					<div class="container">
+						<div class="row gtr-200">
+							<div class="col-4 col-12-mobile" id="sidebar">
+								<hr class="first" />
+								<section>
+										<h3>Team Name</h3>
+									</header>
+								</section>
+								<hr />
+								{% for team in teams %}
+									<a href = "#"><button>Del</button></a>
+									<a href = "{{team[0]}}">{{team[0]}}</a>
+									<hr />
+								{% endfor %}
+							</div>
+							<div class="col-8 col-12-mobile imp-mobile team" id="content">
+								<article id="main">
+									<header>
+										<h2>Team Information</a></h2>
+										{% if users %}
+											<h3>Leader : {{sel_team[1]}} </h3>
+											<h5>Score : {{sel_team[2]}} </h5>
+											<hr />
+											{% for user in users %}
+											<h4>
+												Member : {{(user[0])}}
+											</h4>
+												<article id="sub">
+													<header>
+														Comment
+													</header>
+													{% if (option == 1) and (session['ID'] == user[0])%}
+															<form action="/team-proc/" method="post">
+																<textarea type="text" name="MESSAGE">{{user[1]}}</textarea>
+																<button type="submit">Modify</button>
+															</form>
+													{% else %}
+														<pre>{{user[1]}}</pre>
+												</article>
+												<hr />
+													{% endif %}
+											{% endfor %}
+										{% endif %}
+									</header>
+								</article>
+							</div>
+						</div>
+						<hr />
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+				{% include "/base/footer.html" %}
+		</div>
+
+		<!-- Scripts -->
+                        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.dropotron.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrolly.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/util.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+	</body>
+</html>
