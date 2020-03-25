@@ -5,11 +5,19 @@ function challenge_choice_on(challenge){
 	challenge_name = document.getElementById(challenge_name).innerHTML;
 	challenge_message = document.getElementById(challenge_message).innerHTML;
 
+
+	/*개행, html <, > 사용*/
 	challenge_name = challenge_name.replace(/(?:\r\n|\r|\n)/g, '<br />');
-	document.getElementById("challenge_name").innerHTML = challenge_name;
+	challenge_name = challenge_name.replace(/&lt;/gi, '<');
+	challenge_name = challenge_name.replace(/&gt;/gi, '>');
 
 	challenge_message = challenge_message.replace(/(?:\r\n|\r|\n)/g, '<br />');
+	challenge_message = challenge_message.replace(/&lt;/gi, '<');
+	challenge_message = challenge_message.replace(/&gt;/gi, '>');
+
+	document.getElementById("challenge_name").innerHTML = challenge_name;
 	document.getElementById("challenge_message").innerHTML = challenge_message;
+
 	document.getElementById("challenge-choice-wrapper").style.zIndex = "1";
 	document.getElementById("challenge-choice-body").style.zIndex = "2";
 }
