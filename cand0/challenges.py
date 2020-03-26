@@ -21,41 +21,44 @@ def challenge():
 
 @challenges.route('/challenges-auth/', methods=['POST'])
 def challengesauth():
-	conn = sqlite3.connect('/cand0/cand0/cand0.db')
-	cur = conn.cursor()
+	if 'ID' in session:
+		conn = sqlite3.connect('/cand0/cand0/cand0.db')
+		cur = conn.cursor()
 
-	#Get Parameter Flag
-	FLAG = request.form['test']
+		#Get Parameter Flag
+		FLAG = request.form['test']
 
-	cur.execute("select NAME, VALUE from CHALLENGE where FLAG = '%s'"%FLAG)
-	chk_flag = cur.fetchall()
+		cur.execute("select NAME, VALUE from CHALLENGE where FLAG = '%s'"%FLAG)
+		chk_flag = cur.fetchall()
 
-	#Flag -> correct or incorrect
-	if chk_flag == []:
-		conn.close()
-		return "No Flag"
-	else:
-		#Get User Team Name
-		cur.execute("select TEAM_NAME from USER where ID = '%s'"%session['ID'])
-		USER_TEAM_NAME = cur.fetchall()
-		#duplicate Flag authentication
-		cur.execute("select USER_TEAM_NAME, CHALLENGE_NAME from SOLVES where CHALLENGE_NAME = '" + str(chk_flag[0][0]) + "' and USER_TEAM_NAME = '%s'"%USER_TEAM_NAME[0][0])
-		dup_auth = cur.fetchall()
-
-		if dup_auth == []:
-
-			#insert solves
-			sql = "insert into SOLVES(USER_TEAM_NAME, USER_ID, CHALLENGE_NAME) VALUES (?, ?, ?)"
-			cur.execute(sql, (USER_TEAM_NAME[0][0], session['ID'], str(chk_flag[0][0])))
-			conn.commit()
-
-			#insert team score++
-#			sql = "update TEAM SET SCORE = SCORE + " + str(chk_flag[0][1]) + " where TEAM.NAME = '%s'"%USER_TEAM_NAME[0][0]
-			sql = "UPDATE TEAM SET SCORE = SCORE + '%s', AUTH_TIME = (DATETIME('NOW')) WHERE TEAM.NAME = '%s'"%(str(chk_flag[0][1]), USER_TEAM_NAME[0][0])
-			cur.execute(sql)
-			conn.commit()
-
+		#Flag -> correct or incorrect
+		if chk_flag == []:
 			conn.close()
-			return "SUCCES " + str(chk_flag[0][0]) + " !!!!" + session['ID']
-		else :
-			return "duplicate authentication"
+			return '''<script>history.go(-1);alert("Noop");</script>'''
+		else:
+			#Get User Team Name
+			cur.execute("select TEAM_NAME from USER where ID = '%s'"%session['ID'])
+			USER_TEAM_NAME = cur.fetchall()
+			#duplicate Flag authentication
+			cur.execute("select USER_TEAM_NAME, CHALLENGE_NAME from SOLVES where CHALLENGE_NAME = '" + str(chk_flag[0][0]) + "' and USER_TEAM_NAME = '%s'"%USER_TEAM_NAME[0][0])
+			dup_auth = cur.fetchall()
+
+			if dup_auth == []:
+
+				#insert solves
+				sql = "insert into SOLVES(USER_TEAM_NAME, USER_ID, CHALLENGE_NAME) VALUES (?, ?, ?)"
+				cur.execute(sql, (USER_TEAM_NAME[0][0], session['ID'], str(chk_flag[0][0])))
+				conn.commit()
+
+				#insert team score++
+				sql = "UPDATE TEAM SET SCORE = SCORE + '%s', AUTH_TIME = (DATETIME('NOW')) WHERE TEAM.NAME = '%s'"%(str(chk_flag[0][1]), USER_TEAM_NAME[0][0])
+				cur.execute(sql)
+				conn.commit()
+
+				conn.close()
+				return '''<script>history.go(-1); alert("congratulation");</script>'''
+			else :
+				return '''<script>history.go(-1); alert("duplication authentification");</script>'''
+	else :
+		return '''<script>history.go(-1);alert("please login");</script>'''
+
