@@ -50,7 +50,8 @@ def challengesauth():
 			conn.commit()
 
 			#insert team score++
-			sql = "update TEAM SET SCORE = SCORE + " + str(chk_flag[0][1]) + " where TEAM.NAME = '%s'"%USER_TEAM_NAME[0][0]
+#			sql = "update TEAM SET SCORE = SCORE + " + str(chk_flag[0][1]) + " where TEAM.NAME = '%s'"%USER_TEAM_NAME[0][0]
+			sql = "UPDATE TEAM SET SCORE = SCORE + '%s', AUTH_TIME = (DATETIME('NOW')) WHERE TEAM.NAME = '%s'"%(str(chk_flag[0][1]), USER_TEAM_NAME[0][0])
 			cur.execute(sql)
 			conn.commit()
 
