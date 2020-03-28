@@ -5,7 +5,11 @@
 		{% for i in range(0, prob_len) %}
 			{% if prob[i][1] == cate[0] %}
 		                <article class="col-4 col-12-mobile special challenge-problem">
-		                        <header>
+				{% if prob[i][0] in prob_solves %}
+			                        <header class = "problem2">
+				{% else %}
+						<header class = "problem1">
+				{% endif %}
 		                                <h3 onclick = "challenge_choice_on('{{prob[i][0]}}', '{{ cate[0] }}')" id = "{{prob[i][0]}}name" name = "{{prob[i][0]}}">{{prob[i][0]}}</h3>
 		                                <h4 id = "{{prob[i][0]}}value">VALUE : {{prob[i][3]}}</h4>
 		                                <p id = "{{prob[i][0]}}message">{{prob[i][2]}}</p>

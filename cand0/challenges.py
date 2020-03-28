@@ -15,9 +15,17 @@ def challenge():
 	cur.execute("select distinct CATEGORY from CHALLENGE")
 	category=cur.fetchall()
 
+	prob_solves = []
+	if 'ID' in session:
+		cur.execute("select CHALLENGE_NAME from solves where USER_TEAM_NAME = (select TEAM_NAME from user where ID = '%s')"%session['ID'])
+		prob_solves = cur.fetchall()
+	#list comprehension for user solve problem
+	#two dimensional array -> onw dimesional array
+	prob_solves = [y for x in prob_solves for y in x]
+
 	conn.close()
 
-	return render_template("challenge.html", prob=prob, prob_len = prob_len ,category=category)
+	return render_template("challenge.html", prob=prob, prob_len = prob_len ,category=category, prob_solves = prob_solves)
 
 @challenges.route('/challenges-auth/', methods=['POST'])
 def challengesauth():
