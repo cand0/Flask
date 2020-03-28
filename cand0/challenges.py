@@ -41,7 +41,7 @@ def challengesauth():
 		#Flag -> correct or incorrect
 		if chk_flag == []:
 			conn.close()
-			return '''<script>history.go(-1);alert("Noop");</script>'''
+			return '''<script>alert("Noop");history.go(-1);</script>'''
 		else:
 			#Get User Team Name
 			cur.execute("select TEAM_NAME from USER where ID = '%s'"%session['ID'])
@@ -63,9 +63,9 @@ def challengesauth():
 				conn.commit()
 
 				conn.close()
-				return '''<script>history.go(-1); alert("congratulation");</script>'''
+				return '''<script>alert("Congratulation");history.go(-1);</script>'''
 			else :
-				return '''<script>history.go(-1); alert("duplication authentification");</script>'''
+				return '''<script>alert("duplication authentification");history.go(-1);</script>'''
 	else :
-		return '''<script>history.go(-1);alert("please login");</script>'''
+		return '''<script>alert("please login");history.go(-1);</script>'''
 
