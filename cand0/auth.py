@@ -11,28 +11,32 @@ def signup():
 
 @auth.route("/sign-up-proc/", methods=['POST'])
 def signupproc():
-        conn = sqlite3.connect('/cand0/cand0/cand0.db')
-        cur = conn.cursor()
+	ID = request.form['ID']
+	PSW = request.form['PSW']
+	PSW_repeat = request.form['PSW_repeat']
+	TEAM_NAME = request.form['TEAM_NAME']
+	MESSAGE = request.form['MESSAGE']
 
-        ID = request.form['ID']
-        PSW = request.form['PSW']
-        TEAM_NAME = request.form['TEAM_NAME']
-        MESSAGE = request.form['MESSAGE']
+	if PSW == PSW_repeat:
+		conn = sqlite3.connect('/cand0/cand0/cand0.db')
+		cur = conn.cursor()
 
-        cur.execute("select NAME from TEAM where NAME = '%s'"%TEAM_NAME)
-        chk_team = cur.fetchall()
+		cur.execute("select NAME from TEAM where NAME = '%s'"%TEAM_NAME)
+		chk_team = cur.fetchall()
 
-                ###user TEAM insert###
-        if chk_team == []:
-                sql = "insert into TEAM(NAME, LEADER) values(?,?)"
-                cur.execute(sql, (TEAM_NAME, ID))
-                conn.commit()
-        sql = "insert into USER values(?,?,?,?)"
-        cur.execute(sql, (ID, PSW, TEAM_NAME, MESSAGE))
-        conn.commit()
+			###user TEAM insert###
+		if chk_team == []:
+			sql = "insert into TEAM(NAME, LEADER) values(?,?)"
+			cur.execute(sql, (TEAM_NAME, ID))
+			conn.commit()
+		sql = "insert into USER values(?,?,?,?)"
+		cur.execute(sql, (ID, PSW, TEAM_NAME, MESSAGE))
+		conn.commit()
 
-        conn.close()
-        return redirect(url_for('index'))
+		conn.close()
+		return redirect(url_for('index'))
+	else :
+		return '''<script>alert("Passwords do not match.");history.go(-1);</script>'''
 
 @auth.route("/sign-in/")
 def signin():
