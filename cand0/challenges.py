@@ -24,7 +24,6 @@ def challenge():
 	prob_solves = [y for x in prob_solves for y in x]
 
 	conn.close()
-
 	return render_template("challenge.html", prob=prob, prob_len = prob_len ,category=category, prob_solves = prob_solves)
 
 @challenges.route('/challenges-auth/', methods=['POST'])
