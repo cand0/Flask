@@ -55,9 +55,15 @@
 															</form>
 													{% else %}
 														<pre>{{user[1]}}</pre>
+													{% endif %}
 												</article>
 												<hr />
-													{% endif %}
+											{% endfor %}
+										{% endif %}
+										{% if team_solves %}
+											<h2>Solves</h2>
+											{% for team_solve in team_solves %}
+												{{team_solve[0]}}<br>
 											{% endfor %}
 										{% endif %}
 									</header>

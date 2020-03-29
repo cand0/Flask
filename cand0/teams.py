@@ -27,6 +27,9 @@ def team(name = None):
 		#select team information
 		cur.execute("select NAME, LEADER, SCORE from TEAM where NAME='%s'"%name)
 		sel_team = cur.fetchall()
+		#team solves
+		cur.execute("select CHALLENGE_NAME from SOLVES where USER_TEAM_NAME = '%s'"%name)
+		team_solves = cur.fetchall()
 
 		#Modify My Team
 		option = 0	#option0 : other, option1 : me
@@ -37,7 +40,7 @@ def team(name = None):
 					break
 		if name == 'WAIT_TEAM':
 			return render_template("team.html", teams=teams, my_team = my_team, option = option)
-		return render_template("team.html",teams=teams, name = name, users = users, sel_team = sel_team[0], my_team = my_team, option = option)
+		return render_template("team.html",teams=teams, name = name, users = users, sel_team = sel_team[0], my_team = my_team, option = option, team_solves = team_solves)
 
 	if 'ID' in session:
 		return redirect(url_for('teams.team', name = my_team[0][0]))
