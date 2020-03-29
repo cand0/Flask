@@ -14,13 +14,11 @@ def team(name = None):
 	#find team list
 	cur.execute("select NAME from TEAM")
 	teams = cur.fetchall()
-
 	#Go to my team
 	my_team = []
 	if 'ID' in session:
 		cur.execute("select TEAM_NAME from USER where ID='%s'"%session['ID'])
 		my_team = cur.fetchall()
-
 	#parameter check
 	if name != None:
 		cur.execute("select ID ,MESSAGE from USER where TEAM_NAME='%s'"%name)
@@ -31,18 +29,19 @@ def team(name = None):
 		sel_team = cur.fetchall()
 
 		#Modify My Team
-		option = 0
+		option = 0	#option0 : other, option1 : me
 		for chk_user in users:
 			if 'ID' in session:
 				if chk_user[0] == session['ID'] :
-					option = 1;
-					break;
+					option = 1
+					break
+		if name == 'WAIT_TEAM':
+			return render_template("team.html", teams=teams, my_team = my_team, option = option)
 		return render_template("team.html",teams=teams, name = name, users = users, sel_team = sel_team[0], my_team = my_team, option = option)
 
 	if 'ID' in session:
 		return redirect(url_for('teams.team', name = my_team[0][0]))
-	else :
-		return render_template("team.html", teams=teams, option = option)
+	return render_template("team.html", teams=teams, option = option)
 
 @teams.route("/team-proc/", methods=['POST'])
 def teamproc():
@@ -61,3 +60,47 @@ def teamproc():
 	conn.close()
 
 	return redirect(url_for('teams.team', name = my_team[0][0]))
+
+@teams.route("/team-manage/")
+def teammanage():
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	#find team list
+	cur.execute("select NAME from TEAM")
+	teams = cur.fetchall()
+	#Go to my team
+	cur.execute("select TEAM_NAME from USER where ID='%s'"%session['ID'])
+	my_team = cur.fetchall()
+	#team manage
+	cur.execute("select ID, MESSAGE from user where ID in (select USER_ID from TEAM_WAIT where TEAM_ID = '%s')"%my_team[0][0])
+	team_users = cur.fetchall()
+
+	conn.close()
+	return render_template("team-manage.html", teams=teams, my_team = my_team, team_users = team_users)
+
+@teams.route("/team-manage-proc/<name>")
+def teammanageproc(name = None):
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	#user team
+	cur.execute("select TEAM_ID from TEAM_WAIT where USER_ID = '%s'"%name)
+	user_team = cur.fetchall()
+
+	#leader OK?
+	cur.execute("select LEADER from TEAM where NAME = '%s'"%user_team[0][0])
+	team_leader = cur.fetchall()
+
+	if team_leader[0][0] == session['ID']:
+		sql = "update user set TEAM_NAME = '%s' where ID = '%s'"%(user_team[0][0], name)
+		cur.execute(sql)
+		conn.commit()
+		sql = "delete from TEAM_WAIT where USER_ID = '%s'"%name
+		cur.execute(sql)
+		conn.commit()
+
+
+	conn.close()
+
+	return redirect(url_for('teams.teammanage'))

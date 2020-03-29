@@ -17,18 +17,26 @@ def signupproc():
 	TEAM_NAME = request.form['TEAM_NAME']
 	MESSAGE = request.form['MESSAGE']
 
-	if PSW == PSW_repeat:
-		conn = sqlite3.connect('/cand0/cand0/cand0.db')
-		cur = conn.cursor()
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
 
+	if PSW == PSW_repeat:
 		cur.execute("select NAME from TEAM where NAME = '%s'"%TEAM_NAME)
 		chk_team = cur.fetchall()
 
 			###user TEAM insert###
+		#team not exist
 		if chk_team == []:
 			sql = "insert into TEAM(NAME, LEADER) values(?,?)"
 			cur.execute(sql, (TEAM_NAME, ID))
 			conn.commit()
+		#team exist
+		else :
+			sql = "insert into TEAM_WAIT(USER_ID, TEAM_ID) values(?,?)"
+			cur.execute(sql, (ID, TEAM_NAME))
+			conn.commit()
+			TEAM_NAME = "WAIT_TEAM"
+
 		sql = "insert into USER values(?,?,?,?)"
 		cur.execute(sql, (ID, PSW, TEAM_NAME, MESSAGE))
 		conn.commit()

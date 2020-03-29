@@ -32,6 +32,12 @@ def challengesauth():
 		conn = sqlite3.connect('/cand0/cand0/cand0.db')
 		cur = conn.cursor()
 
+		#Get session['ID'] TEAM
+		cur.execute("select TEAM_NAME from USER where ID = '%s'"%session['ID'])
+		USER_TEAM_NAME = cur.fetchall()
+
+		if USER_TEAM_NAME[0][0] == "WAIT_TEAM":
+			return '''<script>alert("Get permission from the team leader");history.go(-1);</script>'''
 		#Get Parameter Flag
 		FLAG = request.form['test']
 
@@ -43,9 +49,6 @@ def challengesauth():
 			conn.close()
 			return '''<script>alert("Noop");history.go(-1);</script>'''
 		else:
-			#Get User Team Name
-			cur.execute("select TEAM_NAME from USER where ID = '%s'"%session['ID'])
-			USER_TEAM_NAME = cur.fetchall()
 			#duplicate Flag authentication
 			cur.execute("select USER_TEAM_NAME, CHALLENGE_NAME from SOLVES where CHALLENGE_NAME = '" + str(chk_flag[0][0]) + "' and USER_TEAM_NAME = '%s'"%USER_TEAM_NAME[0][0])
 			dup_auth = cur.fetchall()

@@ -18,48 +18,38 @@
 								<section>
 									<header>
                                                                                 {% if session['ID'] %}
-                                                                                	<p><a href = "{{my_team[0][0]}}"> Go to my team!</a></p>
+                                                                                        <p><a href = "/teams/{{my_team[0][0]}}">Go to my team!</a></p>
                                                                                 {% endif %}
 										<h3>Team Name</h3>
 									</header>
 								</section>
 								<hr />
 								{% for team in teams %}
-									<a href = "{{team[0]}}"><p>{{team[0]}}<p></a>
+									<a href = "/teams/{{team[0]}}"><p>{{team[0]}}<p></a>
 									<hr />
 								{% endfor %}
 							</div>
 							<div class="col-8 col-12-mobile imp-mobile team" id="content">
 								<article id="main">
 									<header>
-										<h2>Team Information</a></h2>
-										{% if users %}
-											<h3>Leader : {{sel_team[1]}} </h3>
-											<h5>Score : {{sel_team[2]}} </h5>
-											{% if sel_team[1] == session['ID'] %}
-												<a href = "/team-manage/"><button>Team Manage</button></a>
-											{% endif %}
-											<hr />
-											{% for user in users %}
-											<h4>
-												Member : {{(user[0])}}
-											</h4>
-												<article id="sub">
-													<header>
-														Comment
-													</header>
-													{% if (option == 1) and (session['ID'] == user[0])%}
-															<form action="/team-proc/" method="post">
-																<textarea type="text" name="MESSAGE">{{user[1]}}</textarea>
-																<button type="submit">Modify</button>
-															</form>
-													{% else %}
-														<pre>{{user[1]}}</pre>
-												</article>
-												<hr />
-													{% endif %}
-											{% endfor %}
-										{% endif %}
+										<h2>Team Manage</a></h2>
+                                                                        <header>
+                                                                                {% if team_users %}
+                                                                                        {% for team_user in team_users %}
+                                                                                        <h4>
+                                                                                                Member : {{(team_user[0])}}
+                                                                                        </h4>
+                                                                                                <article id="sub">
+                                                                                                        <header>
+                                                                                                                Comment
+                                                                                                        </header>
+                                                                                                                <pre>{{team_user[1]}}</pre>
+                                                                                                </article>
+												<a href = "/team-manage-proc/{{team_user[0]}}"><button>ACCEPT</button></a>
+                                                                                                <hr />
+                                                                                        {% endfor %}
+                                                                                {% endif %}
+                                                                        </header>
 									</header>
 								</article>
 							</div>
