@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Cand0</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+	</head>
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+                                                                <form action="/admin-pw-proc" method="post">
+                                                                        <div class="container">
+                                                                                <input type="text" placeholder="ID" name="ID" required><br />
+										<input type="password" placeholder="Password" name="PW" requitred><br />
+										<input type="submit" value="submit" />
+									</div>
+								</form>
+							</header>
+						</div>
+					<!-- Nav -->
+					{% include "/base/sub_admin_top.html" %}
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+                        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.dropotron.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrolly.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/util.js')}}"></script>  
+                        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+	</body>
+</html>
