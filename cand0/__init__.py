@@ -17,9 +17,10 @@ def index():
 	conn = sqlite3.connect('/cand0/cand0/cand0.db')
 	cur = conn.cursor()
 
-	cur.execute("select DATE, MESSAGE from INDEX_HINT order by DATE")
+	cur.execute("select NAME, MESSAGE from HINT")
 	hints = cur.fetchall()
 
+	conn.close()
 	return render_template('index.html', hints = hints)
 @app.route("/test/")
 @app.route("/test.html/")

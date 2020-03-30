@@ -3171,6 +3171,13 @@ input, select, textarea {
 	text-align : left;
 	word-break: break-all;
 }
+.hint textarea{
+	width : 100%;
+	hieght : 100%;
+}
+.hint table td input{
+	float : right;
+}
 
 /*team*/
 .team hr {

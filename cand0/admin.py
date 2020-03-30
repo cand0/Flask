@@ -1,17 +1,62 @@
 from flask import Flask, render_template, request, session, Blueprint, redirect, url_for, redirect
 import sqlite3
 
+
+
 admin = Blueprint('admin', __name__)
 
+#index
 @admin.route('/admin/')
 def admin_main():
 	if 'admin' not in session:
 		return redirect(url_for('admin.adminpw'))
-	return render_template("admin.html")
 
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	cur.execute("select NUM, NAME, MESSAGE from HINT")
+	hints = cur.fetchall()
+
+	return render_template("admin.html", hints = hints)
+
+#hint
+@admin.route('/admin-hint-proc/', methods = ["POST"])
+def admin_hint():
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	submit = request.form['submit']
+
+	if submit == "Create":
+		name = request.form['name']
+		message = request.form['message']
+
+		sql = "insert into HINT(NAME, MESSAGE) values(?,?)"
+		cur.execute(sql, (name, message))
+		conn.commit()
+	elif submit == "Modify":
+		num = request.form['num']
+		name = request.form['name'+num]
+		message = request.form['message'+num]
+
+		sql = "update HINT set name = '%s', message = '%s' where num = '%s'"%(name, message, num)
+		cur.execute(sql)
+		conn.commit()
+	elif submit == "Delete":
+		num = request.form['num']
+
+		sql = "delete from HINT where num = '%s'"%(num)
+		cur.execute(sql)
+		conn.commit()
+
+	conn.close()
+	return redirect(url_for('admin.admin_main'))
+
+#admin-password
 @admin.route('/admin-pw/')
 def adminpw():
 	return render_template("admin-pw.html")
+
 @admin.route('/admin-pw-proc/', methods=['POST'])
 def adminpwproc():
 	ID = request.form['ID']
@@ -23,6 +68,7 @@ def adminpwproc():
 			return redirect(url_for('admin.admin_main'))
 	return '''<script>alert("Permission Denied");history.go(-1);</script>'''
 
+#challenge
 @admin.route('/admin-challenges/')
 def adminchallenge():
 	if 'admin' not in session:
@@ -82,6 +128,7 @@ def adminchallengesfix():
 	conn.close()
 	return redirect(url_for('admin.adminchallenge'))
 
+#team
 @admin.route('/admin-teams/')
 @admin.route("/admin-teams/<name>")
 def adminteam(name = None):

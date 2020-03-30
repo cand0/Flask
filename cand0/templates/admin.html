@@ -10,21 +10,41 @@
 
 			<!-- Main -->
 				<div class="wrapper style1">
-
 					<div class="container">
 						<article id="main" class="special">
 							<header>
 								<h2><a href="#">Admin</a></h2>
-								<p>
-								</p>
 							</header>
 						</article>
 						<hr />
-						<div class="row">
-						</div>
-					</div>
-
+                                        <section id="features" class="container special hint">
+                                                        <h2 id = "hints"><a href = "#hints" class = "circled scrolly"><strong>Hint</strong></a></h2>
+								<form action="/admin-hint-proc" method="post">
+									<input type = "text" name = "name" placeholder = "Challenge Name" required></input>
+									<br />
+									<textarea name = "message" placeholder = "Message" required></textarea>
+									<input type = "submit" name = "submit" value = "Create" style = "float:right;"></input>
+								</form>
+								<br /><br /><br />
+								<table>
+									{% for hint in hints %}
+										<form action="/admin-hint-proc" method="post">
+										<tr><th><input type = "text" name = "name{{hint[0]}}" value = "{{hint[1]}}" /></th>
+										<td><textarea name = "message{{hint[0]}}">{{hint[2]}}</textarea></td></tr>
+										<tr>
+											<th><input name = "num" value = "{{hint[0]}}" readonly style = "display:none;" /></th>
+											<td>
+												<input type = "submit" name = "submit" value = "Delete" />
+												<input type = "submit" name = "submit" value = "Modify" />
+											</td>
+										</tr>
+										</form>
+									{% endfor %}
+								</table>
+                                        </section>
+	                                </div>
 				</div>
+
 
 			<!-- Footer -->
 				{% include "/base/footer.html" %}
