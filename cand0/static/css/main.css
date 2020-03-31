@@ -3206,10 +3206,12 @@ input, select, textarea {
 	background-color : #D5D5D5;
 }
 .team pre{
+	height : 150px;
 	font-size : 1em;
 	word-break: break-all;
 	line-height: 1em;
 	font-weight:500;
+        overflow-y:auto;
 }
 /*challenges*/
 .problem1{
