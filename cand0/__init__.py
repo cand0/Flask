@@ -19,9 +19,14 @@ def index():
 
 	cur.execute("select NAME, MESSAGE from HINT")
 	hints = cur.fetchall()
-
+	#replace <br>
+	replace_hints = []
+	for hint in hints:
+		temp_hint1 = hint[0].replace("\n","<br>")
+		temp_hint2 = hint[1].replace("\n","<br>")
+		replace_hints.append((temp_hint1, temp_hint2))
 	conn.close()
-	return render_template('index.html', hints = hints)
+	return render_template('index.html', hints = replace_hints)
 @app.route("/test/")
 @app.route("/test.html/")
 def test():
