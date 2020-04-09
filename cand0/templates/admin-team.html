@@ -21,7 +21,7 @@
 								</section>
 								<hr />
 								{% for team in teams %}
-									<a href = "#"><button>Del</button></a>
+									<a href = "/admin-teams-proc/{{team[0]}}"><button>Del</button></a>
 									<a href = "{{team[0]}}">{{team[0]}}</a>
 									<hr />
 								{% endfor %}
@@ -36,7 +36,7 @@
 											<hr />
 											{% for user in users %}
 											<h4>
-												Member : {{(user[0])}}
+												<a href = "/admin-user-proc/{{user[0]}}"><button>Del</button></a>Member : {{(user[0])}}
 											</h4>
 												<article id="sub">
 													<header>

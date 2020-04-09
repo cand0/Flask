@@ -172,3 +172,39 @@ def adminteam(name = None):
 		return redirect(url_for('teams.adminteam', name = my_team[0][0]))
 	else :
 		return render_template("admin-team.html", teams=teams, option = option)
+
+@admin.route('/admin-teams-proc/<name>')
+def adminteamproc(name = None):
+	if 'admin' not in session:
+		return redirect(url_for('admin.adminpw'))
+
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	#delete team and user
+	sql = "delete from USER where ID in (select ID from user where TEAM_NAME in (select NAME from team where name = '%s'))"%(name)
+	cur.execute(sql)
+	conn.commit()
+
+	sql = "delete from TEAM where NAME = '%s'"%(name)
+	cur.execute(sql)
+	conn.commit()
+
+	conn.close()
+	return '''<script>alert("success");window.location.href="/admin-teams";;</script>'''
+
+@admin.route('/admin-user-proc/<name>')
+def adminuserproc(name = None):
+	if 'admin' not in session:
+		return redirect(url_for('admn.adminpw'))
+
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	#delte user
+	sql = "delete from user where ID = '%s'"%(name)
+	cur.execute(sql)
+	conn.commit()
+
+	conn.close()
+	return '''<script>alert("success");window.location.href="/admin-teams";;</script>'''
