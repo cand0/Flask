@@ -3179,6 +3179,16 @@ input, select, textarea {
 	float : right;
 }
 
+/*sign*/
+.signbutton button{
+	float : right;
+}
+.signbutton a{
+	float : right;
+	width : 120px;
+	height : 32px;
+}
+
 /*team*/
 .team hr {
 	-webkit-margin-before: 0em;

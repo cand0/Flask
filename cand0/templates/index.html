@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
 		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+		<script src="{{url_for('static', filename='js/myjs.js')}}"></script>
 	</head>
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
@@ -16,11 +17,8 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								{% if session['ID'] %}
-									<h1><a href="/index" id="logo">{{ session['ID'] }} </a></h1>
-								{% else %}
-									<h1><a href="/index" id="logo">Cand0</a></h1>
-								{% endif %}
+								<script>ChallTimer()</script>
+								<h1><span id = "leftTimes" style = "color : #00D8FF; font-size:3em;"></span></h1>
 								<hr />
 								<p>Welcome to my CTF</p>
 							</header>
@@ -30,7 +28,6 @@
 									<a href="/logout" class="button circled scrolly">logout</a>
 								{% else %}
 									<a href="/sign-in" class="button circled scrolly">Login</a>
-									<a href="/sign-up" class="button circled scrolly">Register</a>
 								{% endif %}
 							</footer>
 						</div>
@@ -42,7 +39,6 @@
 			<!-- Banner -->
 				<section id="banner">
 					<header>
-						<h2> Welcome to My <strong>CTF</strong></h2>
 					</header>
 				</section>
 

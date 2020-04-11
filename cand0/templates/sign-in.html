@@ -2,7 +2,8 @@
                                         <!-- Inner -->
                                                 <div class="inner">
                                                         <header>
-                                                                <h1><a href="#main" id="logo" class="circled scrolly">Sign-In</h1>
+                                                                <h1><a href="#main" id="logo" class="circled scrolly">Sign-In</a></h1>
+								<a href = "/sign-up" class = "button">Sign-up</a>
                                                         </header>
                                                 </div>
 					{% include "/base/sub_top.html" %}
@@ -12,7 +13,6 @@
 				<div class="wrapper style1">
 					<div class="container">
 						<article id="main" class="special">
-<hr />
 							<section>
 								<form action="/sign-in-proc", method="post">
 									<div class="container">
@@ -20,7 +20,7 @@
 										<input type="text" placeholder="Enter ID" name="ID" required>
 										<label for="psw"><b>Password</b></label>
 										<input type="password" placeholder="Enter Password" name="PSW" required>
-											<div class="clearfix">
+											<div class="signbutton">
 											<br>
 											<button type="submit" class="signin">Sign in</button>
 											</div>
