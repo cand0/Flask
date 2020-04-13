@@ -7,10 +7,14 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
 		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
 		<script src="{{url_for('static', filename='js/myjs.js')}}"></script>
+		<script src="{{url_for('static', filename='js/menu.js')}}"></script>
 	</head>
-	<body class="homepage is-preload">
+	<body class="homepage is-preload" onload="floating();">
 		<div id="page-wrapper">
-
+			<!-- right_menu -->
+			{% if session['ID'] %}
+				{% include "/base/quick_menu.html" %}
+			{% endif %}
 			<!-- Header -->
 				<div id="header">
 
@@ -25,7 +29,6 @@
 							<footer>
 								{% if session['ID'] %}
 									<a href="#banner" class="button circled scrolly">Start</a>
-									<a href="/logout" class="button circled scrolly">logout</a>
 								{% else %}
 									<a href="/sign-in" class="button circled scrolly">Login</a>
 								{% endif %}
@@ -48,7 +51,7 @@
 					<article id="main" class="container special">
 						<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic06.jpg') }}"" alt="" /></a>
 						<header>
-							<h2 id = "notice"><a href="#notice" class = "circled scrolly"><strong>Notice</strong></a></h2>
+							<h2><strong>Notice</strong></h2>
 								<p>1. 가나다라</p>
 								<p>2. 다라마바</p>
 								<p>3. 사마바아</p>
@@ -56,7 +59,7 @@
 								<p>5. 파하가나</p>
 						</header>
 						<footer>
-							<a href="/challenges/" class="button">Go to the Challenge</a>
+							<a href="#hints-wrapper" class="button scrolly">Next</a>
 						</footer>
 					</article>
 
