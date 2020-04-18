@@ -4,7 +4,7 @@
                                         <!-- Inner -->
                                                 <div class="inner">
                                                         <header>
-                                                                <h1><a href="#content" id="logo" class="circled scrolly">Team</h1>
+                                                                <h1><a href="#content" id="logo" class="circled scrolly">Team</a></h1>
                                                         </header>
                                                 </div>
 					{% include "/base/sub_top.html" %}
@@ -13,8 +13,8 @@
 				<div class="wrapper style1">
 					<div class="container">
 						<div class="row gtr-200">
-							<div class="col-4 col-12-mobile" id="sidebar">
-								<hr class="first" />
+							<div class="col-4 col-12-mobile team" id="sidebar">
+								<hr class="first" /> 
 								<section>
 									<header>
                                                                                 {% if session['ID'] %}
@@ -25,21 +25,20 @@
 								</section>
 								<hr />
 								{% for team in teams %}
-									<a href = "{{team[0]}}"><p>{{team[0]}}<p></a>
+									<a href = "{{team[0]}}"><p>{{team[0]}}</p></a>
 									<hr />
 								{% endfor %}
 							</div>
 							<div class="col-8 col-12-mobile imp-mobile team" id="content">
 								<article id="main">
 									<header>
-										<h2>Team Information</a></h2>
 										{% if users %}
+											<h2>Team : {{sel_team[0]}} </h2>
 											<h3>Leader : {{sel_team[1]}} </h3>
 											<h5>Score : {{sel_team[2]}} </h5>
 											{% if sel_team[1] == session['ID'] %}
 												<a href = "/team-manage/"><button>Team Manage</button></a>
 											{% endif %}
-											<hr />
 											{% for user in users %}
 											<h4>
 												Member : {{(user[0])}}
@@ -57,7 +56,6 @@
 														<pre>{{user[1]}}</pre>
 													{% endif %}
 												</article>
-												<hr />
 											{% endfor %}
 										{% endif %}
 										{% if team_solves %}

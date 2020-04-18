@@ -169,7 +169,7 @@ def adminteam(name = None):
 		return render_template("admin-team.html",teams=teams, name = name, users = users, sel_team = sel_team[0], my_team = my_team, option = option)
 
 	if 'ID' in session:
-		return redirect(url_for('teams.adminteam', name = my_team[0][0]))
+		return redirect(url_for('admin.adminteam', name = my_team[0][0]))
 	else :
 		return render_template("admin-team.html", teams=teams, option = option)
 

@@ -1,4 +1,7 @@
                                                 <nav id="nav">
+							{% if session['ID'] %}
+								<p id = "user_info">welcome : {{session['ID']}}&nbsp;&nbsp; <a href = "/logout/">logout</a></p>
+							{% endif %}
                                                         <ul>
                                                                 <li><a href="/">Home</a></li>
                                                                 <li><a href="/teams/">Team</a></li>
