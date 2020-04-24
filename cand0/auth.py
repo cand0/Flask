@@ -4,11 +4,6 @@ import sqlite3
 auth = Blueprint('auth', __name__)
 
 
-@auth.route("/sign-up/")
-def signup():
-        placeholder_signup = "이름 : \n이메일 : "
-        return render_template('sign-up.html', placeholder_signup = placeholder_signup)
-
 @auth.route("/sign-up-proc/", methods=['POST'])
 def signupproc():
 	ID = request.form['ID']
@@ -45,13 +40,6 @@ def signupproc():
 		return redirect(url_for('index'))
 	else :
 		return '''<script>alert("Passwords do not match.");history.go(-1);</script>'''
-
-@auth.route("/sign-in/")
-def signin():
-        if 'ID' in session:
-                return "your session ID = " + str(session["ID"])
-        else:
-                return render_template('sign-in.html')
 
 @auth.route("/sign-in-proc/", methods=['POST'])
 def signinproc():

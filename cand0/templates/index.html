@@ -7,9 +7,12 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
 		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
 		<script src="{{url_for('static', filename='js/myjs.js')}}"></script>
-		<script src="{{url_for('static', filename='js/menu.js')}}"></script>
 	</head>
-	<body class="homepage is-preload" onload="floating();">
+	<body class="homepage is-preload">
+		<!-- sign -->
+		{% include "/base/sign-in.html" %}
+		{% include "/base/sign-up.html" %}
+		<!-- main -->
 		<div id="page-wrapper">
 			<!-- Header -->
 				<div id="header">
@@ -26,7 +29,8 @@
 								{% if session['ID'] %}
 									<a href="#banner" class="button circled scrolly">Start</a>
 								{% else %}
-									<a href="/sign-in" class="button circled scrolly">Login</a>
+									<button onclick="sign_in_on()" class = "button circled scrolly">Login</a>
+<!--									<a href="/sign-in" class="button circled scrolly">Login</a>-->
 								{% endif %}
 							</footer>
 						</div>

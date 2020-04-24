@@ -1,0 +1,27 @@
+<html>
+<body>
+<div id = "sign-up-wrapper" class = "sign-wrapper">
+	<div id = "sign-up-back" onclick = "sign_up_off()" class = "sign-back">
+	</div>
+	<section id = "sign-up-body">
+		<h2>Register</h2>
+		<form action="/sign-up-proc" method="post">
+			<label for="TEAM_NAME"><b>Team Name</b></label>
+			<input type="text" placeholder="Enter Team Name" name="TEAM_NAME" required>
+			<label for="ID"><b>ID</b></label>
+			<input type="text" placeholder="Enter ID" name="ID" required>
+			<label for="psw"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="PSW" required>
+			<label for="psw-repeat"><b>Repeat Password</b></label>
+			<input type="password" placeholder="Repeat Password" name="PSW_repeat" required>
+			<label for="message"><b>Comment</b></label>
+			<textarea type="text"  name="MESSAGE">{{placeholder_signup}}</textarea>
+				<br />
+			<div class = "signbutton">
+				<button type="submit" class="signup">Sign Up</button>
+			</div>
+		</form>
+	</section>
+</div>
+</body>
+</html>

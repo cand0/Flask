@@ -58,3 +58,24 @@ function addzero(num) {
 	if(num < 10) { num = "0" + num; }
 	return num;
 }
+
+function sign_in_on(){
+	document.getElementById("sign-in-wrapper").style.display = "flex";
+	document.getElementById("sign-in-back").style.display = "inline-block";
+}
+function sign_in_off(){
+	document.getElementById("sign-in-wrapper").style.display = "none";
+	document.getElementById("sign-in-back").style.display = "none";
+}
+function sign_up_on(){
+        document.getElementById("sign-up-wrapper").style.display = "flex";
+        document.getElementById("sign-up-back").style.display = "inline-block";
+}
+function sign_up_off(){
+        document.getElementById("sign-up-wrapper").style.display = "none";
+        document.getElementById("sign-up-back").style.display = "none";
+}
+
+function test(){
+	alert("test");
+}

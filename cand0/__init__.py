@@ -26,7 +26,10 @@ def index():
 		temp_hint2 = hint[1].replace("\n","<br>")
 		replace_hints.append((temp_hint1, temp_hint2))
 	conn.close()
-	return render_template('index.html', hints = replace_hints)
+
+	placeholder_signup = "이름 : \n이메일 : "
+
+	return render_template('index.html', hints = replace_hints, placeholder_signup = placeholder_signup)
 @app.route("/test/")
 @app.route("/test.html/")
 def test():
