@@ -76,6 +76,19 @@ function sign_up_off(){
         document.getElementById("sign-up-back").style.display = "none";
 }
 
+function copy_clipboard(copy_num)
+{
+	var clip_share = document.getElementById(copy_num);
+	clip_share.select();
+	document.execCommand("copy");
+
+	clip_share.blur();
+
+	alert("Copy Succes");
+
+
+}
+
 function test(){
 	alert("test");
 }

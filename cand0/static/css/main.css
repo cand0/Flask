@@ -3398,42 +3398,8 @@ input, select, textarea {
 .challenge-auth {
 	background:rgba(189,189,189,0.5);
 	border-radius:30px 30px 30px 30px;
-	left : 10px;
+	padding : 0 1em 1em 1em
 }
-/*scoreboard*/
-.scoreboard {
-}
-.scoreboard > table{
-	font-weight:800;
-}
-.td-first{
-	background-color:#FAE0D4;
-	height:30px;
-}
-.td-second{
-	background-color:#fff0d4;
-	height:30px;
-}
-.td-top{
-	height:45px;
-	text-align: center;
-	font-size:30px;
-}
-.td-place{
-	width:10%;
-	font-weight:900;
-	font-size:20px;
-	text-align:center;
-}
-.td-name{
-	width:80%;
-}
-.td-score{
-	width:10%;
-	font-weight:5;
-	text-align:center;
-}
-
 /*admin*/
 .admin-pw {
 	width : 100%;
@@ -3463,3 +3429,42 @@ input, select, textarea {
 	height : 100%;
 	voerflow-y:auto;
 }
+.admin_files_name{
+    text-align: center;
+    border: 0;
+    background: inherit;
+    width: 100%;
+    font-size: 1.25em;
+}
+/*public*/
+.col-3-table > table{
+        font-weight:800;
+}
+        /*#table 3 line*/
+        .tr-first{
+                background-color:#FAE0D4;
+                height:30px;
+        }
+        .tr-second{
+                background-color:#fff0d4;
+                height:30px;
+        }
+        .tr-top{
+                height:45px;
+                text-align: center;
+                font-size:30px;
+        }
+        .td-left{
+                width:10%;
+                font-weight:900;
+                font-size:20px;
+                text-align:center;
+        }
+        .td-center{
+                width:80%;
+        }
+        .td-right{
+                width:10%;
+                font-weight:5;
+                text-align:center;
+        }
