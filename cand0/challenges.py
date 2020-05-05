@@ -39,7 +39,7 @@ def challengesauth():
 		if USER_TEAM_NAME[0][0] == "WAIT_TEAM":
 			return '''<script>alert("Get permission from the team leader");history.go(-1);</script>'''
 		#Get Parameter Flag
-		FLAG = request.form['test']
+		FLAG = request.form['flag']
 
 		cur.execute("select NAME, VALUE from CHALLENGE where FLAG = '%s'"%FLAG)
 		chk_flag = cur.fetchall()
