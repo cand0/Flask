@@ -11,16 +11,16 @@
 				<div class="wrapper style1">
 
 					<div class="container">
-						<div id="scoreboard" class="scoreboard">
+						<div id="scoreboard" class="col-3-table">
 							<table>
-								<td class = "td-top">Place</td><td class = "td-top">Team_Name</td><td class = "td-top">Score</td>
+								<td class = "tr-top">Place</td><td class = "tr-top">Team_Name</td><td class = "tr-top">Score</td>
 									{% for i in range(len_score) %}
 										{% if i%2 == 0 %}
-											<tr class = "td-first">
+											<tr class = "tr-first">
 										{% else %}
-											<tr class = "td-second">
+											<tr class = "tr-second">
 										{% endif %}
-										<td class="td-place">{{i+1}}</td><td class="td-name"><a href = "/teams/{{score[i][0]}}">{{score[i][0]}}</a></td><td class="td-score">{{score[i][1]}}</h3>
+										<td class="td-left">{{i+1}}</td><td class="td-center"><a href = "/teams/{{score[i][0]}}">{{score[i][0]}}</a></td><td class="td-right">{{score[i][1]}}</h3>
 									{% endfor %}
 							</table>
 						</div>

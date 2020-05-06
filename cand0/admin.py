@@ -1,7 +1,11 @@
 from flask import Flask, render_template, request, session, Blueprint, redirect, url_for, redirect
 import sqlite3
 
+#file upload/download
+from werkzeug import secure_filename
+from flask import send_from_directory
 
+import os
 
 admin = Blueprint('admin', __name__)
 
@@ -207,4 +211,58 @@ def adminuserproc(name = None):
 	conn.commit()
 
 	conn.close()
-	return '''<script>alert("success");window.location.href="/admin-teams";;</script>'''
+	return '''<script>alert("success");window.location.href="/admin-teams";</script>'''
+
+@admin.route('/admin-files/')
+def adminfiles():
+	if 'admin' not in session:
+		return redirect(url_for('admin.adminpw'))
+
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+	cur.execute("select FIELD, NAME from FILES");
+	files = cur.fetchall();
+
+	cur.execute("select distinct CATEGORY from CHALLENGE");
+	challenges_category = cur.fetchall();
+
+	conn.close()
+	return render_template("admin-files.html", files = files, len_files = len(files), challenges_category = challenges_category)
+
+@admin.route("/admin-files-proc/")
+@admin.route("/admin-files-proc/<name>/")
+@admin.route("/admin-files-proc/", methods = ['GET', 'POST'])
+def adminfilesproc(name = None):
+	if 'admin' not in session:
+		return redirect(url_for('admin.adminpw'))
+
+	if request.method == 'POST':
+		conn = sqlite3.connect('/cand0/cand0/cand0.db')
+		cur = conn.cursor()
+
+		field = request.form['field']
+		f = request.files['file']
+
+		cur.execute("select NAME from FILES where NAME = '%s'"%f.filename)
+		chk_filename = cur.fetchall()
+		if chk_filename == []:	#no file
+			f.save("/cand0/cand0/files/" + secure_filename(f.filename))
+			cur.execute("insert into FILES(field, NAME) values(?,?)", (field, f.filename))
+			conn.commit()
+			conn.close()
+			return '''<script>alert("success");window.location.href="/admin-files";</script>'''
+		else :
+			conn.close()
+			return "Check File Name"
+	else :
+		if name != None:
+			conn = sqlite3.connect('/cand0/cand0/cand0.db')
+			cur = conn.cursor()
+
+			cur.execute("delete from FILES where NAME = '%s'"%name)
+			conn.commit()
+			conn.close()
+
+			os.system("rm /cand0/cand0/files/" + name)
+			return '''<script>alert("success");window.location.href="/admin-files";</script>'''
+		return '''<script>alert("error");window.location.href="/admin-files";</script>'''

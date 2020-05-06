@@ -1,0 +1,68 @@
+                {% include "/base/top.html" %}
+                                        <!-- Inner -->
+                                                <div class="inner">
+                                                        <header>
+                                                                <h1><a href="#logo" id="logo" class="circled scrolly">File Manage</a></h1>
+                                                        </header>
+                                                </div>
+                {% include "/base/sub_admin_top.html" %}
+		</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+					<div class="container">
+                                                <div class=" challenge-auth team">
+                                                        <h3>File upload</h3>
+							<form action = "/admin-files-proc/" method = "post" enctype = "multipart/form-data">
+								<select name = "field">
+									<option>undefined</option>
+									{% for challenge_category in challenges_category %}
+										<option>{{challenge_category[0]}}</option>
+									{% endfor %}
+								</select>
+								<input type = "file" name = "file" />
+								<input type = "submit" value = "upload"/>
+							</form>
+                                                </div>
+						<hr />
+						<div class = "col-3-table">
+                                                        <table>
+                                                                <td class = "tr-top">분류</td><td class = "tr-top">이름</td><td class = "tr-top">기능</td>
+								{% for i in range(len_files) %}
+									{% if i % 2 == 0 %}
+										<tr class = "tr-first">
+									{% else %}
+										<tr class = "tr-second">
+									{% endif %}
+										<td class="td-left">{{files[i][0]}}</td>
+										<td class="td-center">
+													<a href = "/files/{{files[i][1]}}">
+														<input type = "text" id = "copy_{{i}}" value = "{{files[i][1]}}" class = "admin_files_name" readonly />
+													</a>
+										</td>
+										<td class="td-right">
+											<h4 onclick = "copy_clipboard('copy_{{i}}')" style = "cursor : pointer; ">Copy</h4>
+											<a href = "/admin-files-proc/{{files[i][1]}}"><h4>delete</h4></a>
+										</td>
+								{% endfor %}
+                                                        </table>
+						</div>
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+				{% include "/base/footer.html" %}
+		</div>
+
+		<!-- Scripts -->
+                        <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.dropotron.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrolly.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/util.js')}}"></script>
+                        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+			<script src="{{url_for('static', filename='js/myjs.js')}}"></script>
+	</body>
+</html>

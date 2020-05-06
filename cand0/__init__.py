@@ -7,6 +7,10 @@ from cand0.teams import teams
 from cand0.scoreboard import scoreboard
 from cand0.admin import admin
 
+from flask import request
+from werkzeug import secure_filename
+import os
+from flask import send_from_directory
 app = Flask(__name__)
 
 app.secret_key = 'session_secret_key'
@@ -30,10 +34,12 @@ def index():
 	placeholder_signup = "이름 : \n이메일 : "
 
 	return render_template('index.html', hints = replace_hints, placeholder_signup = placeholder_signup)
-@app.route("/test/")
-@app.route("/test.html/")
-def test():
-	return render_template('test.html')
+
+@app.route("/files/<filename>")
+def fileupload(filename = None):
+	upload_folder = '/cand0/cand0/files'
+	app.config['upload_folder'] = upload_folder
+	return send_from_directory(directory = app.config['upload_folder'],filename = filename)
 
 app.register_blueprint(challenges)
 app.register_blueprint(auth)
