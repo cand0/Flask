@@ -12,7 +12,7 @@ def team(name = None):
 	cur = conn.cursor()
 
 	#find team list
-	cur.execute("select NAME from TEAM")
+	cur.execute("select NAME from TEAM where HIDDEN = '0'")
 	teams = cur.fetchall()
 	#Go to my team
 	my_team = []
@@ -40,7 +40,7 @@ def team(name = None):
 					break
 		if name == 'WAIT_TEAM':
 			return render_template("team.html", teams=teams, my_team = my_team, option = option)
-		return render_template("team.html",teams=teams, name = name, users = users, sel_team = sel_team[0], my_team = my_team, option = option, team_solves = team_solves)
+		return render_template("team.html",teams=teams, name = name, users = users, sel_team = sel_team, my_team = my_team, option = option, team_solves = team_solves)
 
 	if 'ID' in session:
 		return redirect(url_for('teams.team', name = my_team[0][0]))

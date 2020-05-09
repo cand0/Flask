@@ -32,7 +32,7 @@ def signupproc():
 			conn.commit()
 			TEAM_NAME = "WAIT_TEAM"
 
-		sql = "insert into USER values(?,?,?,?)"
+		sql = "insert into USER(ID, PW, TEAM_NAME, MESSAGE) values(?,?,?,?)"
 		cur.execute(sql, (ID, PSW, TEAM_NAME, MESSAGE))
 		conn.commit()
 

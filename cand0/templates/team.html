@@ -20,44 +20,49 @@
                                                                                 {% if session['ID'] %}
                                                                                 	<p><a href = "{{my_team[0][0]}}"> Go to my team!</a></p>
                                                                                 {% endif %}
-										<h3>Team Name</h3>
 									</header>
 								</section>
-								<hr />
-								{% for team in teams %}
-									<a href = "{{team[0]}}"><p>{{team[0]}}</p></a>
-									<hr />
-								{% endfor %}
+                                                                <table>
+									<td><h3> Team Name </h3></td>
+                                                                        {% for team in teams %}
+                                                                        <tr>
+                                                                                <th><a href = "{{team[0]}}">{{team[0]}}</a></th>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                </table>
 							</div>
 							<div class="col-8 col-12-mobile imp-mobile team" id="content">
 								<article id="main">
 									<header>
 										{% if users %}
-											<h2>Team : {{sel_team[0]}} </h2>
-											<h3>Leader : {{sel_team[1]}} </h3>
-											<h5>Score : {{sel_team[2]}} </h5>
-											{% if sel_team[1] == session['ID'] %}
+											<h2>Team : {{sel_team[0][0]}} </h2>
+											<h3>Leader : {{sel_team[0][1]}} </h3>
+											<h5>Score : {{sel_team[0][2]}} </h5>
+
+											{% if sel_team[0][1] == session['ID'] %}
 												<a href = "/team-manage/"><button>Team Manage</button></a>
 											{% endif %}
+
 											{% for user in users %}
-											<h4>
-												Member : {{(user[0])}}
-											</h4>
-												<article id="sub">
-													<header>
-														Comment
-													</header>
-													{% if (option == 1) and (session['ID'] == user[0])%}
+												<h4>
+													Member : {{(user[0])}}
+												</h4>
+													<article id="sub">
+														<header>
+															Comment
+														</header>
+														{% if (option == 1) and (session['ID'] == user[0])%}
 															<form action="/team-proc/" method="post">
 																<textarea type="text" name="MESSAGE">{{user[1]}}</textarea>
 																<button type="submit">Modify</button>
 															</form>
-													{% else %}
-														<pre>{{user[1]}}</pre>
-													{% endif %}
-												</article>
+														{% else %}
+															<pre>{{user[1]}}</pre>
+														{% endif %}
+													</article>
 											{% endfor %}
 										{% endif %}
+
 										{% if team_solves %}
 											<h2>Solves</h2>
 											{% for team_solve in team_solves %}

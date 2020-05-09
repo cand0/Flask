@@ -3325,13 +3325,24 @@ input, select, textarea {
 	font-weight:500;
         overflow-y:auto;
 }
-/*challenges*/
-.problem1{
-        background-color : #DF7366;
-        border-radius:30px 30px 30px 30px;
+.team table{
+	display : inline-block;
+	text-align : left;
+	width : 100%;
+	word-break : break-all;
 }
-.problem2{
-	background-color : #00BA13;
+.team table td{
+	display : inline-block
+}
+.team table th{
+	display : inline-block;
+	width : 100%;
+	border-top-style : solid;
+	border-width : 1px;
+	margin-top : 10px
+}
+/*challenges*/
+.problem{
 	border-radius:30px 30px 30px 30px;
 }
 .challenge-problem > header h3{
@@ -3468,3 +3479,11 @@ input, select, textarea {
                 font-weight:5;
                 text-align:center;
         }
+	/* change color */
+
+	.color1{
+		background : #DF7366;
+	}
+	.color2{
+		background : #00BA13;
+	}

@@ -8,7 +8,7 @@ def scoreboardmain():
 	conn = sqlite3.connect('/cand0/cand0/cand0.db')
 	cur = conn.cursor()
 
-	cur.execute("select NAME, SCORE from team order by SCORE desc, AUTH_TIME desc")
+	cur.execute("select NAME, SCORE from team where HIDDEN = '0' order by SCORE desc, AUTH_TIME desc")
 	score = cur.fetchall()
 	len_score = len(score)
 

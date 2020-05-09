@@ -15,16 +15,28 @@
 						<div class="row gtr-200">
 							<div class="col-4 col-12-mobile team" id="sidebar">
 								<hr class="first" />
-								<section>
-										<h3>Team Name</h3>
-									</header>
-								</section>
-								<hr />
-								{% for team in teams %}
-									<a href = "/admin-teams-proc/{{team[0]}}"><button>Del</button></a>
-									<a href = "{{team[0]}}">{{team[0]}}</a>
-									<hr />
-								{% endfor %}
+
+								<table>
+									<td><h3>Team Name</h3><td>
+									{% for team in teams %}
+									<tr>
+										<th><a href = "{{team[0]}}">{{team[0]}}</a></th>
+									</tr>
+									<tr>
+										<td><a href = "/admin-teams-proc/delete/{{team[0]}}"><button>Del</button></a></td>
+										<td>
+											<a href = "/admin-teams-proc/hidden/{{team[0]}}">
+												{% if team[1] == 0 %}
+													<button class = "color1">HIDDEN</button>
+												{% else %}
+													<button class = "color2">HIDDEN</button>
+												{% endif %}
+											</a>
+										</td>
+									</tr>
+									{% endfor %}
+								</table>
+
 							</div>
 							<div class="col-8 col-12-mobile imp-mobile team" id="content">
 								<article id="main">

@@ -145,7 +145,7 @@ def adminteam(name = None):
 	cur = conn.cursor()
 
 	#find team list
-	cur.execute("select NAME from TEAM")
+	cur.execute("select NAME, HIDDEN from TEAM")
 	teams = cur.fetchall()
 
 	#Go to my team
@@ -177,25 +177,40 @@ def adminteam(name = None):
 	else :
 		return render_template("admin-team.html", teams=teams, option = option)
 
-@admin.route('/admin-teams-proc/<name>')
-def adminteamproc(name = None):
+@admin.route('/admin-teams-proc')
+@admin.route('/admin-teams-proc/<type>/<name>')
+def adminteamproc(type = None, name = None):
 	if 'admin' not in session:
 		return redirect(url_for('admin.adminpw'))
 
 	conn = sqlite3.connect('/cand0/cand0/cand0.db')
 	cur = conn.cursor()
 
-	#delete team and user
-	sql = "delete from USER where ID in (select ID from user where TEAM_NAME in (select NAME from team where name = '%s'))"%(name)
-	cur.execute(sql)
-	conn.commit()
+	if type == "delete":
+		#delete team and user
+		sql = "delete from USER where ID in (select ID from user where TEAM_NAME in (select NAME from team where name = '%s'))"%(name)
+		cur.execute(sql)
+		conn.commit()
 
-	sql = "delete from TEAM where NAME = '%s'"%(name)
-	cur.execute(sql)
-	conn.commit()
+		sql = "delete from TEAM where NAME = '%s'"%(name)
+		cur.execute(sql)
+		conn.commit()
+		return '''<script>alert("delete success");window.location.href="/admin-teams";;</script>'''
+	elif type == "hidden":
+		cur.execute("select HIDDEN from TEAM where NAME = '%s'"%name)
+		chk_hidden = cur.fetchall()
 
+		if chk_hidden[0][0] == 0:
+			val_hidden = 1
+		elif chk_hidden[0][0] == 1:
+			val_hidden = 0
+		else :
+			return "error check hidden value"
+		cur.execute("update TEAM set HIDDEN = '%s' where name = '%s'"%(val_hidden, name))
+		conn.commit()
+		return '''<script>alert("hidden value change");window.location.href="/admin-teams";;</script>'''
 	conn.close()
-	return '''<script>alert("success");window.location.href="/admin-teams";;</script>'''
+	return "error"
 
 @admin.route('/admin-user-proc/<name>')
 def adminuserproc(name = None):
