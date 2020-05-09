@@ -7,7 +7,36 @@ from flask import send_from_directory
 
 import os
 
+#password encryption
+import bcrypt
+
+
+
+
 admin = Blueprint('admin', __name__)
+
+#admin-password
+@admin.route('/admin-pw/')
+def adminpw():
+	return render_template("admin-pw.html")
+
+@admin.route('/admin-pw-proc/', methods=['POST'])
+def adminpwproc():
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	ID = request.form['ID']
+	PW = request.form['PW']
+
+	cur.execute("select PW from USER where ID = 'admin'")
+	password = cur.fetchall()
+	conn.close()
+
+	if ID == "admin" :
+		if bcrypt.checkpw(PW.encode(), password[0][0]):
+			session['admin'] = ID
+			return redirect(url_for('admin.admin_main'))
+	return '''<script>alert("Permission Denied");history.go(-1);</script>'''
 
 #index
 @admin.route('/admin/')
@@ -20,6 +49,8 @@ def admin_main():
 
 	cur.execute("select NUM, NAME, MESSAGE from HINT")
 	hints = cur.fetchall()
+
+	conn.close()
 
 	return render_template("admin.html", hints = hints)
 
@@ -55,22 +86,6 @@ def admin_hint():
 
 	conn.close()
 	return redirect(url_for('admin.admin_main'))
-
-#admin-password
-@admin.route('/admin-pw/')
-def adminpw():
-	return render_template("admin-pw.html")
-
-@admin.route('/admin-pw-proc/', methods=['POST'])
-def adminpwproc():
-	ID = request.form['ID']
-	PW = request.form['PW']
-
-	if ID == "admin":
-		if PW == "admin_pw":
-			session['admin'] = ID
-			return redirect(url_for('admin.admin_main'))
-	return '''<script>alert("Permission Denied");history.go(-1);</script>'''
 
 #challenge
 @admin.route('/admin-challenges/')

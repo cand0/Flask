@@ -6,3 +6,4 @@ Flask 1.1.1
 Werkzeug 0.16.0
 sqlite 2.8.17
 pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)
+bcrpy 3.1.7

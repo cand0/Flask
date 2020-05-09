@@ -1,6 +1,10 @@
 from flask import Flask, render_template, url_for, request, redirect, session, escape, Blueprint
 import sqlite3
 
+import bcrypt
+
+
+
 auth = Blueprint('auth', __name__)
 
 
@@ -31,9 +35,11 @@ def signupproc():
 			cur.execute(sql, (ID, TEAM_NAME))
 			conn.commit()
 			TEAM_NAME = "WAIT_TEAM"
+		#password encryption
+		hash_password = bcrypt.hashpw(PSW.encode(), bcrypt.gensalt())
 
 		sql = "insert into USER(ID, PW, TEAM_NAME, MESSAGE) values(?,?,?,?)"
-		cur.execute(sql, (ID, PSW, TEAM_NAME, MESSAGE))
+		cur.execute(sql, (ID, hash_password, TEAM_NAME, MESSAGE))
 		conn.commit()
 
 		conn.close()
@@ -43,22 +49,24 @@ def signupproc():
 
 @auth.route("/sign-in-proc/", methods=['POST'])
 def signinproc():
-        conn = sqlite3.connect('/cand0/cand0/cand0.db')
-        cur = conn.cursor()
-        ID = request.form['ID']
-        PW = request.form['PSW']
-        cur.execute("select PW from USER where USER.ID='%s'"%ID)
-        rows = cur.fetchall()
-        conn.close()
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+	ID = request.form['ID']
+	PW = request.form['PSW']
 
-        if rows:
-                if str(PW) == str(rows[0][0]):
-                        session['ID'] = request.form['ID']
-                        return redirect(url_for('index'))
-                else :
-                        return "password incorrect"
-        else :
-                return "no ID"
+	cur.execute("select PW from USER where USER.ID='%s'"%ID)
+	rows = cur.fetchall()
+	conn.close()
+
+	#check password
+	if rows:
+		if bcrypt.checkpw(PW.encode(), rows[0][0]):
+			session['ID'] = request.form['ID']
+			return redirect(url_for('index'))
+		else :
+			return "password incorrect"
+	else :
+		return "no ID"
 
 @auth.route("/logout/")
 def logout():
