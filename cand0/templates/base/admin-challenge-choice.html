@@ -1,22 +1,24 @@
 <html>
 <body>
-        <div id = "challenge-choice-back" class = "challenge-choice-wrapper" style="background:#D7D9D9; z-index:-1;">
-        </div>
 	<div id = "challenge-choice-wrapper" class = "challenge-choice-wrapper" onclick="challenge_choice_off()">
 	</div>
-	<form action = "/admin-challenges-fix/" method = "post">
-	<div id = "challenge-choice-body" class="challenge-choice-body admin-challenge">
-		<div class="challenge-choice-name admin-challenge-choice-name">
-			<input type="text" id = "admin_challenge_name" name = "admin_challenge_name" readonly />
-			<input type="int" id = "admin_challenge_value" name = "admin_challenge_value"></input>
-			<input type="text" id = "admin_challenge_category" name = "admin_challenge_category"></input>
-		</div>
-		<div class="challenge-choice-message">
-			<textarea type="text" id = "admin_challenge_message" name = "admin_challenge_message"></textarea>
-		</div>
-		<input type="submit" value = "update" name = "submit"></input>
-		<input type="submit" value = "delete" name = "submit"></input>
-	</form>
+	<div id = "challenge-choice-body" class = "challenge-choice-body admin-challenge">
+		<form action = "/admin-challenges-fix/" method = "post">
+			<table>
+			<tr><td colspan = "2"><input type = "text" id = "admin_challenge_name" name = "admin_challenge_name" readonly /></td></tr>
+			<tr>
+				<td class = "admin-challenge-top"><input type = "text" id = "admin_challenge_value" name = "admin_challenge_value"></input></td>
+				<td class = "admin-challenge-top"><input type = "text" id = "admin_challenge_category" name = "admin_challenge_category"></input></td>
+			</tr>
+			<tr><td class = "admin-challenge-top" colspan = "2"><input type = "text" id = "admin_challenge_flag" name = "admin_challenge_flag"></input></td></tr>
+			<tr><td class = "admin-challenge-message" colspan = "2"><textarea type = "text" id = "admin_challenge_message" name = "admin_challenge_message"></textarea></td></tr>
+			<tr>
+				<td><input type="submit" value = "update" name = "submit"></input></td>
+				<td><input type="submit" value = "delete" name = "submit"></input></td>
+			</tr>
+			</table>
+		</form>
 	</div>
+
 </body>
 </html>

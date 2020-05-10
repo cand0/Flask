@@ -96,7 +96,7 @@ def adminchallenge():
 	conn = sqlite3.connect('/cand0/cand0/cand0.db')
 	cur = conn.cursor()
 
-	cur.execute("select NAME, CATEGORY, MESSAGE, VALUE from CHALLENGE")
+	cur.execute("select NAME, CATEGORY, MESSAGE, VALUE, FLAG from CHALLENGE")
 	prob = cur.fetchall()
 	prob_len = len(prob)
 
@@ -107,8 +107,8 @@ def adminchallenge():
 
 	return render_template("admin-challenges.html", prob=prob, prob_len = prob_len ,category=category)
 
-@admin.route('/admin-challenges-auth/', methods=['POST'])
-def adminchallengeauth():
+@admin.route('/admin-challenges-create/', methods=['POST'])
+def adminchallengescreate():
 	if 'admin' not in session:
 		return redirect(url_for('admin.adminpw'))
 
@@ -121,6 +121,13 @@ def adminchallengeauth():
 	value = request.form['challenge_value']
 	flag = request.form['challenge_flag']
 
+	#deduplication name or flag
+	cur.execute("select NAME from CHALLENGE where FLAG = '%s' or NAME = '%s'"%(flag,name))
+	duplication_value = cur.fetchall()
+
+	if duplication_value != []:
+		return "duplication with " + str(duplication_value)
+
 	sql = "insert into CHALLENGE(NAME, CATEGORY, MESSAGE, VALUE, FLAG) values(?,?,?,?,?)"
 	cur.execute(sql, (name, category, message, value, flag))
 	conn.commit()
@@ -129,6 +136,8 @@ def adminchallengeauth():
 
 @admin.route('/admin-challenges-fix/', methods=['POST'])
 def adminchallengesfix():
+	if 'admin' not in session:
+		return redirect(url_for('admin.adminpw'))
 	conn = sqlite3.connect('/cand0/cand0/cand0.db')
 	cur = conn.cursor()
 
@@ -136,10 +145,18 @@ def adminchallengesfix():
 	value = request.form['admin_challenge_value']
 	message = request.form['admin_challenge_message']
 	category = request.form['admin_challenge_category']
+	flag = request.form['admin_challenge_flag']
 	submit = request.form['submit']
 
 	if submit == "update" :
-		sql = "update CHALLENGE set VALUE = '%s', MESSAGE = '%s', CATEGORY = '%s' where NAME = '%s'"%(value, message, category, name)
+		#deduplication flag
+		cur.execute("select NAME from CHALLENGE where FLAG = '%s'"%flag)
+		duplication_flag = cur.fetchall()
+
+		if duplication_flag != []:
+			return "duplication flag with " + str(duplication_flag)
+
+		sql = "update CHALLENGE set VALUE = '%s', MESSAGE = '%s', CATEGORY = '%s', FLAG = '%s' where NAME = '%s'"%(value, message, category, flag, name)
 	elif submit == "delete" :
 		sql = "delete from CHALLENGE where NAME = '%s'"%(name)
 	cur.execute(sql)

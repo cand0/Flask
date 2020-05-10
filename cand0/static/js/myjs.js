@@ -7,24 +7,27 @@ function challenge_choice_on(challenge){
 
 
 	/*개행, html <, > 사용*/
-	challenge_name = challenge_name.replace(/(?:\r\n|\r|\n)/g, '<br />');
+	challenge_name = challenge_name.replace(/(?:\r\n|\r|\n)/gi, '<br />');
 	challenge_name = challenge_name.replace(/&lt;/gi, '<');
 	challenge_name = challenge_name.replace(/&gt;/gi, '>');
 
-	challenge_message = challenge_message.replace(/(?:\r\n|\r|\n)/g, '<br />');
+	challenge_message = challenge_message.replace(/(?:\r\n|\r|\n)/gi, '<br />');
 	challenge_message = challenge_message.replace(/&lt;/gi, '<');
 	challenge_message = challenge_message.replace(/&gt;/gi, '>');
 
 	document.getElementById("challenge_name").innerHTML = challenge_name;
 	document.getElementById("challenge_message").innerHTML = challenge_message;
 
+
+	document.getElementById("challenge-choice-wrapper").style.display = "inline-block";
+	document.getElementById("challenge-choice-body").style.display = "inline-block";
 	document.getElementById("challenge-choice-wrapper").style.zIndex = "1";
 	document.getElementById("challenge-choice-body").style.zIndex = "2";
 }
 
 function challenge_choice_off(){
-        document.getElementById("challenge-choice-wrapper").style.zIndex = "-2";
-	document.getElementById("challenge-choice-body").style.zIndex = "-2";
+        document.getElementById("challenge-choice-wrapper").style.display = "none";
+	document.getElementById("challenge-choice-body").style.display = "none";
 }
 
 function ChallTimer(){
@@ -44,12 +47,12 @@ function leftTimer() {
 	const min = nowDate.getMinutes();
 	const sec = nowDate.getSeconds();
 
-	if(15-hour < 0){
+	if(24-hour < 0){
 		document.getElementById("leftTimes").innerHTML = "00:00:00";
 		 document.getElementById("leftTimes").style = "color : red; font-size:3em"; 
 	}
 	else{
-		document.getElementById("leftTimes").innerHTML = (15-hour) + ":" + addzero((59-min)) + ":" + addzero(59-sec);
+		document.getElementById("leftTimes").innerHTML = (23-hour) + ":" + addzero((59-min)) + ":" + addzero(59-sec);
 	}
 }
 

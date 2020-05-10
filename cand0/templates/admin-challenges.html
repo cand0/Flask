@@ -2,7 +2,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="#" id="logo">Challenge</a></h1>
+								<h1><a href="#logo" class = "circled scrolly" id="logo">Challenge</a></h1>
 							</header>
 						</div>
 			{% include "/base/sub_admin_top.html" %}
@@ -15,7 +15,7 @@
                                                         <header>
                                                                 <h2><a href="#main" class="circled scrolly">Create Challenge</a></h2>
                                                         </header>
-						<form action="/admin-challenges-auth/" method="post">
+						<form action="/admin-challenges-create/" method="post">
 							<input type="text" placeholder="Challenge Name" name="challenge_name" /required></input>
 							<input type="text" placeholder="Category" name="challenge_category" /required></input>
 							<input type="text" placeholder="Value" name="challenge_value" /required></input>
@@ -25,7 +25,7 @@
 						</form>
 						<hr />
 						<header id = "Manage_challenge"><h2><a href="#Manage_challenge" class="circled scrolly">Manage Challenge</a></h2></header>
-						{% include "/base/problem.html" %}
+						{% include "/base/admin-problem.html" %}
 						</article>
 					</div>
 
