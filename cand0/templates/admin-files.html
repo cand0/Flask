@@ -13,12 +13,7 @@
                                                 <div class=" challenge-auth team">
                                                         <h3>File upload</h3>
 							<form action = "/admin-files-proc/" method = "post" enctype = "multipart/form-data">
-								<select name = "field">
-									<option>undefined</option>
-									{% for challenge_category in challenges_category %}
-										<option>{{challenge_category[0]}}</option>
-									{% endfor %}
-								</select>
+								<input type = "text" placeholder = "Challenge Name" name = "field"></input>
 								<input type = "file" name = "file" />
 								<input type = "submit" value = "upload"/>
 							</form>
