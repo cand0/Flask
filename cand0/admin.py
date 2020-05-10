@@ -12,7 +12,6 @@ import bcrypt
 
 
 
-
 admin = Blueprint('admin', __name__)
 
 #admin-password
@@ -203,14 +202,11 @@ def adminteam(name = None):
 	cur = conn.cursor()
 
 	#find team list
-	cur.execute("select NAME, HIDDEN from TEAM")
+	cur.execute("select NAME, HIDDEN from TEAM order by HIDDEN desc")
 	teams = cur.fetchall()
 
 	#Go to my team
 	my_team = []
-	if 'ID' in session:
-		cur.execute("select TEAM_NAME from USER where ID='%s'"%session['ID'])
-		my_team = cur.fetchall()
 
 	#parameter check
 	if name != None:
@@ -221,19 +217,8 @@ def adminteam(name = None):
 		cur.execute("select NAME, LEADER, SCORE from TEAM where NAME='%s'"%name)
 		sel_team = cur.fetchall()
 
-		#Modify My Team
-		option = 0
-		for chk_user in users:
-			if 'ID' in session:
-				if chk_user[0] == session['ID'] :
-					option = 1
-					break
 		return render_template("admin-team.html",teams=teams, name = name, users = users, sel_team = sel_team[0], my_team = my_team, option = option)
-
-	if 'ID' in session:
-		return redirect(url_for('admin.adminteam', name = my_team[0][0]))
-	else :
-		return render_template("admin-team.html", teams=teams, option = option)
+	return render_template("admin-team.html", teams=teams, option = option)
 
 @admin.route('/admin-teams-proc')
 @admin.route('/admin-teams-proc/<type>/<name>')
@@ -265,7 +250,13 @@ def adminuserproc(name = None):
 	conn = sqlite3.connect('/cand0/cand0/cand0.db')
 	cur = conn.cursor()
 
-	#delte user
+	#leader don`t delete
+	cur.execute("select NAME from TEAM where LEADER = '%s'"%name)
+	chk_leader = cur.fetchall()
+	if chk_leader !=[]:
+		return '''<script>alert("leader don`t delete");window.location.href="/admin-teams";</script>'''
+
+	#delete user
 	sql = "delete from user where ID = '%s'"%(name)
 	cur.execute(sql)
 	conn.commit()
