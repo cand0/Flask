@@ -3486,10 +3486,16 @@ input, select, textarea {
                 text-align:center;
         }
 	/* change color */
-
 	.color1{
 		background : #DF7366;
 	}
 	.color2{
 		background : #00BA13;
+	}
+
+	/* hidden button */
+	.hidden-button{
+		width : 100%;
+		border-width : 1px;
+		border-style : solid;
 	}

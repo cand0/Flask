@@ -8,11 +8,11 @@ def challenge():
 	conn = sqlite3.connect('/cand0/cand0/cand0.db')
 	cur = conn.cursor()
 
-	cur.execute("select NAME, CATEGORY, MESSAGE, VALUE from CHALLENGE")
+	cur.execute("select NAME, CATEGORY, MESSAGE, VALUE from CHALLENGE where HIDDEN = '0'")
 	prob = cur.fetchall()
 	prob_len = len(prob)
 
-	cur.execute("select distinct CATEGORY from CHALLENGE")
+	cur.execute("select distinct CATEGORY from CHALLENGE where HIDDEN = '0'")
 	category=cur.fetchall()
 
 	prob_solves = []

@@ -5,15 +5,18 @@
 		{% for i in range(0, prob_len) %}
 			{% if prob[i][1] == cate[0] %}
 		                <article class="col-4 col-12-mobile special challenge-problem">
-				{% if prob[i][0] in prob_solves %}
-			                        <header class = "problem color2">
-				{% else %}
-						<header class = "problem color1">
-				{% endif %}
-		                                <h3 onclick = "challenge_choice_on('{{prob[i][0]}}', '{{ cate[0] }}')" id = "{{prob[i][0]}}name" name = "{{prob[i][0]}}">{{prob[i][0]}}</h3>
-		                                <h4 id = "{{prob[i][0]}}value">VALUE : {{prob[i][3]}}</h4>
-		                                <p id = "{{prob[i][0]}}message" style = "display:none;">{{prob[i][2]}}</p>
-						<p id = "{{prob[i][0]}}flag" style = "display:none;">{{prob[i][4]}}</p>
+			                <header class = "problem color1">
+		                        <h3 onclick = "challenge_choice_on('{{prob[i][0]}}', '{{ cate[0] }}')" id = "{{prob[i][0]}}name" name = "{{prob[i][0]}}">{{prob[i][0]}}</h3>
+		                        <h4 id = "{{prob[i][0]}}value">VALUE : {{prob[i][3]}}</h4>
+		                        <p id = "{{prob[i][0]}}message" style = "display:none;">{{prob[i][2]}}</p>
+					<p id = "{{prob[i][0]}}flag" style = "display:none;">{{prob[i][4]}}</p>
+					<a href = "/change-hidden/CHALLENGE/{{prob[i][0]}}">
+						{% if prob[i][5] == 0 %}
+							<button class = "hidden-button color1">HIDDEN</button>
+						{% else %}
+							<button class = "hidden-button color2">HIDDEN</button>
+						{% endif %}
+					</a>
 		                        </header>
 		                </article>
 			{% endif %}

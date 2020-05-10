@@ -96,7 +96,7 @@ def adminchallenge():
 	conn = sqlite3.connect('/cand0/cand0/cand0.db')
 	cur = conn.cursor()
 
-	cur.execute("select NAME, CATEGORY, MESSAGE, VALUE, FLAG from CHALLENGE")
+	cur.execute("select NAME, CATEGORY, MESSAGE, VALUE, FLAG, HIDDEN from CHALLENGE")
 	prob = cur.fetchall()
 	prob_len = len(prob)
 
@@ -159,10 +159,36 @@ def adminchallengesfix():
 		sql = "update CHALLENGE set VALUE = '%s', MESSAGE = '%s', CATEGORY = '%s', FLAG = '%s' where NAME = '%s'"%(value, message, category, flag, name)
 	elif submit == "delete" :
 		sql = "delete from CHALLENGE where NAME = '%s'"%(name)
+
 	cur.execute(sql)
 	conn.commit()
 	conn.close()
 	return redirect(url_for('admin.adminchallenge'))
+
+@admin.route('/change-hidden/<table>/<name>')
+def changehidden(table = None, name = None):
+	if 'admin' not in session:
+		return redirect(url_for('admin.adminpw'))
+	conn = sqlite3.connect('/cand0/cand0/cand0.db')
+	cur = conn.cursor()
+
+	cur.execute("select HIDDEN from '%s' where NAME = '%s'"%(table,name))
+	chk_hidden = cur.fetchall()
+
+	if chk_hidden[0][0] == 0:
+		val_hidden = 1
+	elif chk_hidden[0][0] == 1:
+		val_hidden = 0
+	else :
+		return "error check hidden value"
+	cur.execute("update '%s' set HIDDEN = '%s' where name = '%s'"%(table, val_hidden, name))
+	conn.commit()
+	if table == "CHALLENGE" :
+		return '''<script>alert("hidden value change");window.location.href="/admin-challenges/";</script>'''
+	elif table == "TEAM" :
+		return '''<script>alert("hidden value change");window.location.href="/admin-teams/";</script>'''
+	else :
+		return "check your table name"
 
 #team
 @admin.route('/admin-teams/')
@@ -227,20 +253,7 @@ def adminteamproc(type = None, name = None):
 		sql = "delete from TEAM where NAME = '%s'"%(name)
 		cur.execute(sql)
 		conn.commit()
-		return '''<script>alert("delete success");window.location.href="/admin-teams";;</script>'''
-	elif type == "hidden":
-		cur.execute("select HIDDEN from TEAM where NAME = '%s'"%name)
-		chk_hidden = cur.fetchall()
-
-		if chk_hidden[0][0] == 0:
-			val_hidden = 1
-		elif chk_hidden[0][0] == 1:
-			val_hidden = 0
-		else :
-			return "error check hidden value"
-		cur.execute("update TEAM set HIDDEN = '%s' where name = '%s'"%(val_hidden, name))
-		conn.commit()
-		return '''<script>alert("hidden value change");window.location.href="/admin-teams";;</script>'''
+		return '''<script>alert("delete success");window.location.href="/admin-teams";</script>'''
 	conn.close()
 	return "error"
 

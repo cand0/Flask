@@ -25,11 +25,11 @@
 									<tr>
 										<td><a href = "/admin-teams-proc/delete/{{team[0]}}"><button>Del</button></a></td>
 										<td>
-											<a href = "/admin-teams-proc/hidden/{{team[0]}}">
+											<a href = "/change-hidden/TEAM/{{team[0]}}">
 												{% if team[1] == 0 %}
-													<button class = "color1">HIDDEN</button>
+													<button class = "button-hidden color1">HIDDEN</button>
 												{% else %}
-													<button class = "color2">HIDDEN</button>
+													<button class = "button-hidden color2">HIDDEN</button>
 												{% endif %}
 											</a>
 										</td>
